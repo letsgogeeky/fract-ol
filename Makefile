@@ -10,3 +10,9 @@ ${NAME}: MLX
 MLX: 
 	@cmake -B build lib/MLX42
 	@make HEADERS='-I lib/glfw-3.3.8/include' -C ./build
+
+clean:
+	rm -rf build/
+
+fclean: clean
+	rm a.out
