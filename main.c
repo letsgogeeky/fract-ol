@@ -23,10 +23,10 @@ void ft_randomize(void* param)
 		for (int32_t y = 0; y < image->height; ++y)
 		{
 			uint32_t color = ft_pixel(
-				rand() % 0xFF, // R
+				rand() % 0xFA, // R
 				rand() % 0xFF, // G
 				rand() % 0xFF, // B
-				rand() % 0xFF  // A
+				rand() % 0x7F  // A
 			);
 			mlx_put_pixel(image, i, y, color);
 		}

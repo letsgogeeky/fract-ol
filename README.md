@@ -1,6 +1,6 @@
 # Fractals are wonderful
 
-Fractional dimesion!
+"fractal, in mathematics, any of a class of complex geometric shapes that commonly have “fractional dimension,”"
 
 ### Adding MLX42 as a submodule
 `git submodule add https://github.com/codam-coding-college/MLX42 lib/MLX42`
