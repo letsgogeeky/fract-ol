@@ -1,18 +1,28 @@
 NAME:= fractol
+CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -Ofast
+LIBMLX := ./lib/MLX42
 
-SRC:= main.c
+HEADERS := -I ./include -I $(LIBMLX)/include
+LIBS := $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
 
-all: ${NAME}
+SRCS := main.c
+OBJS := ${addprefix src/, ${SRCS:.c=.o}}
 
-${NAME}: MLX
-	gcc main.c build/libmlx42.a -Iinclude -lglfw
 
-MLX: 
-	@cmake -B build lib/MLX42
-	@make HEADERS='-I lib/glfw-3.3.8/include' -C ./build
+all: MLX ${NAME}
+
+%.o: %.c
+	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS)
+
+${NAME}: ${OBJS}
+	@$(CC) $(OBJS) $(LIBS) $(HEADERS) -o $(NAME) && echo "Good Job!"
+
+MLX:
+	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
 
 clean:
-	rm -rf build/
+	@rm -rf $(OBJS)
+	@rm -rf $(LIBMLX)/build
 
 fclean: clean
-	rm a.out
+	rm -f fractol
