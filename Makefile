@@ -15,7 +15,7 @@ all: MLX ${NAME}
 	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS)
 
 ${NAME}: ${OBJS}
-	@$(CC) $(OBJS) $(LIBS) $(HEADERS) -o $(NAME) && echo "Good Job!"
+	@$(CC) $(OBJS) $(LIBS) $(HEADERS) -o $(NAME) && echo "Successful build...!"
 
 MLX:
 	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
