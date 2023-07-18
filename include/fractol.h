@@ -1,15 +1,9 @@
-#include <math.h>
-#include "MLX42/MLX42.h"
-
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
-typedef struct s_complex
-{
-    double real;
-    double imag;
-}   t_complex;
+#include <stdlib.h>
+#include <unistd.h>
+#include "MLX42/MLX42.h"
 
-// t_complex   *complex_multiply(t_complex *a);
 
 #endif

@@ -1,10 +1,8 @@
-#include <stdlib.h>
-#include <stdio.h>
-#include <unistd.h>
 #include "fractol.h"
+#include "ft_complex.h"
 
-#define WIDTH 1200
-#define HEIGHT 1200
+#define WIDTH 900
+#define HEIGHT 900
 
 // Exit the program as failure.
 static void ft_error(void)
@@ -26,45 +24,12 @@ static void ft_pixel(void *img, int x, int y, uint32_t color)
 	mlx_put_pixel(img, x, y, color);
 
 }
-
-void	print_complex(t_complex complex)
-{
-	printf("complex->real = %f || complex->imaginary = %f\n", complex.real, complex.imag);
-}
-
-void   complex_multiply(t_complex *complex)
-{
-    double   original_real;
-
-	original_real = complex->real;
-    complex->real = (original_real * original_real) - (complex->imag * complex->imag);
-    complex->imag = (original_real * complex->imag) + (complex->imag * original_real);
-}
-
-void complex_add(t_complex *original, t_complex *c)
-{
-	original->real += c->real;
-	original->imag += c->imag;
-}
-
-
-t_complex	*complex_copy(t_complex *original)
-{
-	t_complex *copied;
-
-	copied = (t_complex *)malloc(sizeof(t_complex *));
-	copied->real = original->real;
-	copied->imag = original->imag;
-
-	return(copied);
-}
-
 int32_t	main(void)
 {
 
 	// MLX allows you to define its core behaviour before startup.
 	mlx_set_setting(MLX_MAXIMIZED, true);
-	mlx_t* mlx = mlx_init(WIDTH, HEIGHT, "42Balls", true);
+	mlx_t* mlx = mlx_init(WIDTH, HEIGHT, "Fractol", true);
 	int x;
 	int y;
 	t_complex *z;
@@ -74,7 +39,6 @@ int32_t	main(void)
 	double	re_max;
 	double im_max;
 	double	pixel_size;
-	// double temp_real;
 	re_min = -2;
 	re_max = 1;
 	im_max = 1;
@@ -87,7 +51,7 @@ int32_t	main(void)
 	/* Do stuff */
 
 	// Create and display the image.
-	mlx_image_t* img = mlx_new_image(mlx, 1200, 1200);
+	mlx_image_t* img = mlx_new_image(mlx, 900, 900);
 	if (!img || (mlx_image_to_window(mlx, img, 0, 0) < 0))
 		ft_error();
 
