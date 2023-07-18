@@ -112,3 +112,4 @@ Temporary Items
 build/
 venv/
 .venv
+./fractol

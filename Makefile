@@ -1,12 +1,14 @@
 NAME:= fractol
-CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -Ofast
+CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code
 LIBMLX := ./lib/MLX42
 
 HEADERS := -I ./include -I $(LIBMLX)/include
-LIBS := $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm
+LIBS := $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm -g -fsanitize=address
 
+COMPLEX_SRCS := ft_complex/arithmetic.c ft_complex/utils.c
 SRCS := main.c
-OBJS := ${addprefix src/, ${SRCS:.c=.o}}
+
+OBJS := ${addprefix src/, ${COMPLEX_SRCS:.c=.o} ${SRCS:.c=.o}}
 
 
 all: MLX ${NAME}
