@@ -66,18 +66,18 @@ int32_t	main(int argc, char **argv)
 	{
 		if (is_equal_str(argv[1], "mandelbro"))
 		{
-			printf("Yaaay it's mandelbrot");
 			env->f_type = MANDELBROT;
+			env->name = "Mandelbrot Fractol";
 		}
 		else if (is_equal_str(argv[1], "julia"))
 		{
-			printf("Yaaay it's Julia!!");
 			env->f_type = JULIA;
+			env->name = "Julia Fractol";
 		}
 	}
 	// MLX allows you to define its core behaviour before startup.
 	mlx_set_setting(MLX_MAXIMIZED, true);
-	mlx_t* mlx = mlx_init(WIDTH, HEIGHT, "Fractol", true);
+	mlx_t* mlx = mlx_init(WIDTH, HEIGHT, env->name, true);
 	int x;
 	int y;
 	t_complex *z;
