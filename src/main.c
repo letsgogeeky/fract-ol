@@ -24,9 +24,57 @@ static void ft_pixel(void *img, int x, int y, uint32_t color)
 	mlx_put_pixel(img, x, y, color);
 
 }
-int32_t	main(void)
-{
 
+int	ft_strlen(const char *c)
+{
+	int	size;
+
+	size = 0;
+	while (c[size] != '\0')
+	{
+		size++;
+	}
+	return (size);
+}
+
+int is_equal_str(char *s1, char *s2)
+{
+	int	i;
+
+	i = 0;
+	if (ft_strlen(s1) != ft_strlen(s2))
+		return (0);
+	if (!s1 && !s2)
+		return (1);
+	while (s1[i] == s2[i] && s1[i] != '\n')
+		i++;
+	if (i < ft_strlen(s1))
+		return (0);
+	return (1);
+}
+int32_t	main(int argc, char **argv)
+{
+	t_fractol *env;
+
+	env = (t_fractol *)malloc(sizeof(t_fractol *));
+
+	if (argc < 2)
+	{
+		env->f_type = MANDELBROT;
+	}
+	else
+	{
+		if (is_equal_str(argv[1], "mandelbro"))
+		{
+			printf("Yaaay it's mandelbrot");
+			env->f_type = MANDELBROT;
+		}
+		else if (is_equal_str(argv[1], "julia"))
+		{
+			printf("Yaaay it's Julia!!");
+			env->f_type = JULIA;
+		}
+	}
 	// MLX allows you to define its core behaviour before startup.
 	mlx_set_setting(MLX_MAXIMIZED, true);
 	mlx_t* mlx = mlx_init(WIDTH, HEIGHT, "Fractol", true);
@@ -39,6 +87,7 @@ int32_t	main(void)
 	double	re_max;
 	double im_max;
 	double	pixel_size;
+	double r;
 	re_min = -2;
 	re_max = 1;
 	im_max = 1;
@@ -60,32 +109,59 @@ int32_t	main(void)
 	// ft_pixel(img, 10, 10);
 	x = 0;
 	y = 0;
+	r = 20;
 	pixel_size = (double)(re_max - re_min) / mlx->width;
-	printf("Pixel Size = %f\n", pixel_size);
 	while (y < mlx->height)
 	{
 		while (x < mlx->width)
 		{
-			c->real = re_min + (x * pixel_size);
-			c->imag = im_max - (y * pixel_size);
-			z->real = 0;
-			z->imag = 0;
-			n = 0;
-			while (n < 100)
+			if (env->f_type == JULIA)
 			{
-				if (sqrt((z->real * z->real) + (z->imag * z->imag)) > (re_max - re_min))
-					break ;
-				complex_multiply(z);
-				complex_add(z, c);
-				n++;
+				z->real = re_min + (x * pixel_size);
+				z->imag = im_max - (y * pixel_size);
+				c->real = 0.4;
+				c->imag = 0.3;
+				n = 0;
+				while (n < 50)
+				{
+					if (sqrt((z->real * z->real) + (z->imag * z->imag)) > r * r)
+						break ;
+					complex_multiply(z);
+					complex_add(z, c);
+					n++;
+				}
+				if (n == 50)
+				{
+					ft_pixel(img, x, y, 0x10000005);
+				}
+				else
+				{
+					ft_pixel(img, x, y, 0x10000005 * n * n * n * n * n);
+				}
 			}
-			if (n == 100)
+			else if (env->f_type == MANDELBROT)
 			{
-				ft_pixel(img, x, y, 0xFF0000FF);
-			}
-			else
-			{
-				ft_pixel(img, x, y, 0xFFAA00FF);
+				c->real = re_min + (x * pixel_size);
+				c->imag = im_max - (y * pixel_size);
+				z->real = 0;
+				z->imag = 0;
+				n = 0;
+				while (n < 100)
+				{
+					if (sqrt((z->real * z->real) + (z->imag * z->imag)) > (re_max - re_min))
+						break ;
+					complex_multiply(z);
+					complex_add(z, c);
+					n++;
+				}
+				if (n == 100)
+				{
+					ft_pixel(img, x, y, 0xFF0000FF);
+				}
+				else
+				{
+					ft_pixel(img, x, y, 0xFFAA00FF);
+				}
 			}
 			x++;
 		}
