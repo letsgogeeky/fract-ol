@@ -61,10 +61,11 @@ int32_t	main(int argc, char **argv)
 	if (argc < 2)
 	{
 		env->f_type = MANDELBROT;
+		env->name = "Mandelbrot Fractol";
 	}
 	else
 	{
-		if (is_equal_str(argv[1], "mandelbro"))
+		if (is_equal_str(argv[1], "mandelbrot"))
 		{
 			env->f_type = MANDELBROT;
 			env->name = "Mandelbrot Fractol";
@@ -88,7 +89,7 @@ int32_t	main(int argc, char **argv)
 	double im_max;
 	double	pixel_size;
 	double r;
-	re_min = -2;
+	re_min = -2.5;
 	re_max = 1;
 	im_max = 1;
 	z = (t_complex *)malloc(sizeof(t_complex*));
@@ -136,7 +137,7 @@ int32_t	main(int argc, char **argv)
 				}
 				else
 				{
-					ft_pixel(img, x, y, 0x10000005 * n * n * n * n * n);
+					ft_pixel(img, x, y, 0xF0AA00FF * n);
 				}
 			}
 			else if (env->f_type == MANDELBROT)
@@ -156,11 +157,11 @@ int32_t	main(int argc, char **argv)
 				}
 				if (n == 100)
 				{
-					ft_pixel(img, x, y, 0xFF0000FF);
+					ft_pixel(img, x, y, 0x00000000);
 				}
 				else
 				{
-					ft_pixel(img, x, y, 0xFFAA00FF);
+					ft_pixel(img, x, y, 0xF0AA00FF * n);
 				}
 			}
 			x++;
