@@ -166,6 +166,8 @@ int32_t	main(int argc, char **argv)
 	// NOTE: Do this before calling mlx_loop!
 	// mlx_loop_hook(mlx, ft_hook, mlx);
 	mlx_key_hook(mlx, ft_key_hook, mlx);
+	mlx_scroll_hook(mlx, ft_scroll_hook, mlx);
+	mlx_resize_hook(mlx, ft_window_resize_hook, mlx);
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
 	return (EXIT_SUCCESS);
