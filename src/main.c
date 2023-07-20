@@ -1,7 +1,7 @@
 #include "fractol.h"
 #include "ft_complex.h"
 
-#define WIDTH 900
+#define WIDTH 1300
 #define HEIGHT 900
 
 // Exit the program as failure.
@@ -12,12 +12,15 @@ static void ft_error(void)
 }
 
 // Print the window width and height.
-static void ft_hook(void* param)
+static void ft_key_hook(mlx_key_data_t key, void * param)
 {
-	const mlx_t* mlx = param;
-
-	printf("WIDTH: %d | HEIGHT: %d\n", mlx->width, mlx->height);
+	printf("%p\n", param);
+	if(key.key == MLX_KEY_SPACE && mlx_is_key_down(param, MLX_KEY_SPACE))
+	{
+		puts("The SPACE key was pressed!");
+	}
 }
+
 
 static void ft_pixel(void *img, int x, int y, uint32_t color)
 {
@@ -89,7 +92,7 @@ int32_t	main(int argc, char **argv)
 	double im_max;
 	double	pixel_size;
 	double r;
-	re_min = -2.5;
+	re_min = -2;
 	re_max = 1;
 	im_max = 1;
 	z = (t_complex *)malloc(sizeof(t_complex*));
@@ -101,7 +104,7 @@ int32_t	main(int argc, char **argv)
 	/* Do stuff */
 
 	// Create and display the image.
-	mlx_image_t* img = mlx_new_image(mlx, 900, 900);
+	mlx_image_t* img = mlx_new_image(mlx, WIDTH, HEIGHT);
 	if (!img || (mlx_image_to_window(mlx, img, 0, 0) < 0))
 		ft_error();
 
@@ -172,7 +175,7 @@ int32_t	main(int argc, char **argv)
 	// Register a hook and pass mlx as an optional param.
 	// NOTE: Do this before calling mlx_loop!
 	// mlx_loop_hook(mlx, ft_hook, mlx);
-	ft_hook(mlx);
+	mlx_key_hook(mlx, ft_key_hook, mlx);
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
 	return (EXIT_SUCCESS);
