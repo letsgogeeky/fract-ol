@@ -11,7 +11,7 @@ t_complex	*complex_copy(t_complex *original)
 	return(copied); 
 }
 
-void	print_complex(t_complex *complex)
-{
-	printf("complex->real = %f || complex->imaginary = %f\n", complex->real, complex->imag);
-}
+// void	print_complex(t_complex *complex)
+// {
+// 	puts("complex->real = %f || complex->imaginary = %f\n", complex->real, complex->imag);
+// }

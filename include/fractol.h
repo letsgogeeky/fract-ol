@@ -3,6 +3,7 @@
 
 #include <stdlib.h>
 #include <unistd.h>
+#include <stdio.h>
 #include "MLX42/MLX42.h"
 
 enum FractolTypeEnum
@@ -15,6 +16,7 @@ typedef struct s_fractol
 {
     enum FractolTypeEnum    f_type;
     char                    *name;
+    int            estimator_max;
 }   t_fractol;
 
 #endif
