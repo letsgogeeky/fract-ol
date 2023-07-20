@@ -1,5 +1,5 @@
-#include "fractol.h"
 #include "ft_complex.h"
+#include "frontend.h"
 
 #define WIDTH 1300
 #define HEIGHT 900
@@ -10,17 +10,6 @@ static void ft_error(void)
 	fprintf(stderr, "%s", mlx_strerror(mlx_errno));
 	exit(EXIT_FAILURE);
 }
-
-// Print the window width and height.
-static void ft_key_hook(mlx_key_data_t key, void * param)
-{
-	printf("%p\n", param);
-	if(key.key == MLX_KEY_SPACE && mlx_is_key_down(param, MLX_KEY_SPACE))
-	{
-		puts("The SPACE key was pressed!");
-	}
-}
-
 
 static void ft_pixel(void *img, int x, int y, uint32_t color)
 {
@@ -79,6 +68,7 @@ int32_t	main(int argc, char **argv)
 			env->name = "Julia Fractol";
 		}
 	}
+	env->estimator_max = 100;
 	// MLX allows you to define its core behaviour before startup.
 	mlx_set_setting(MLX_MAXIMIZED, true);
 	mlx_t* mlx = mlx_init(WIDTH, HEIGHT, env->name, true);
@@ -113,7 +103,7 @@ int32_t	main(int argc, char **argv)
 	// ft_pixel(img, 10, 10);
 	x = 0;
 	y = 0;
-	r = 20;
+	r = 23;
 	pixel_size = (double)(re_max - re_min) / mlx->width;
 	while (y < mlx->height)
 	{
@@ -123,10 +113,10 @@ int32_t	main(int argc, char **argv)
 			{
 				z->real = re_min + (x * pixel_size);
 				z->imag = im_max - (y * pixel_size);
-				c->real = 0.4;
+				c->real = 0.5;
 				c->imag = 0.3;
 				n = 0;
-				while (n < 50)
+				while (n < env->estimator_max)
 				{
 					if (sqrt((z->real * z->real) + (z->imag * z->imag)) > r * r)
 						break ;
@@ -134,7 +124,7 @@ int32_t	main(int argc, char **argv)
 					complex_add(z, c);
 					n++;
 				}
-				if (n == 50)
+				if (n == env->estimator_max)
 				{
 					ft_pixel(img, x, y, 0x10000005);
 				}
