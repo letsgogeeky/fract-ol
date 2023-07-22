@@ -16,12 +16,12 @@ typedef struct s_fractol
 {
     enum FractolTypeEnum    f_type;
     char                    *name;
+    double                  real_min;
+    double                  real_max;
+    double                  imaginary_max;
     int                     estimator_max;
-    int32_t                 width;
-    int32_t                 height;
-    int32_t                 real_min;
-    int32_t                 real_max;
-    int32_t                 imaginary_max;
+    int                     width;
+    int                     height;
 }   t_fractol;
 
 #endif

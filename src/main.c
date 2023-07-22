@@ -1,9 +1,6 @@
 #include "ft_complex.h"
 #include "frontend.h"
 
-#define WIDTH 1300
-#define HEIGHT 900
-
 // Exit the program as failure.
 static void ft_error(void)
 {
@@ -42,8 +39,7 @@ int32_t	main(int argc, char **argv)
 {
 	t_fractol *env;
 
-	env = (t_fractol *)malloc(sizeof(t_fractol *));
-
+	env = (t_fractol *)malloc(sizeof(t_fractol));
 	if (argc < 2)
 	{
 		env->f_type = MANDELBROT;
@@ -62,13 +58,13 @@ int32_t	main(int argc, char **argv)
 			env->name = "Julia Fractol";
 		}
 	}
-	env->estimator_max = 100;
+	env->estimator_max = 70;
 	env->width = 1366;
-	env->height = 768;
+	env->height = 960;
 	// MLX allows you to define its core behaviour before startup.
 	mlx_set_setting(MLX_MAXIMIZED, true);
 	mlx_set_setting(MLX_STRETCH_IMAGE, true);
-	mlx_t* mlx = mlx_init(WIDTH, HEIGHT, env->name, true);
+	mlx_t* mlx = mlx_init(env->width, env->height, env->name, true);
 	
 	int x;
 	int y;
@@ -89,17 +85,18 @@ int32_t	main(int argc, char **argv)
 	/* Do stuff */
 
 	// Create and display the image.
-	mlx_image_t* img = mlx_new_image(mlx, WIDTH, HEIGHT);
+	mlx_image_t* img = mlx_new_image(mlx, env->width, env->height);
 	if (!img || (mlx_image_to_window(mlx, img, 0, 0) < 0))
 		ft_error();
 
 	// Even after the image is being displayed, we can still modify the buffer.
-	// mlx_put_pixel(img, 0, 0, 0xFF0000FF);
-	// ft_pixel(img, 10, 10);
 	x = 0;
 	y = 0;
-	r = 23;
-	pixel_size = (double)(env->real_max - env->real_min) / mlx->width;
+	r = 17;
+	printf("Width on env = %d\n", env->width);
+	printf("env estimator = %d\n", env->estimator_max);
+	pixel_size = (double)(env->real_max - env->real_min) / env->width;
+	printf("pixel size: %f\n", pixel_size);
 	while (y < mlx->height)
 	{
 		while (x < mlx->width)
@@ -128,7 +125,7 @@ int32_t	main(int argc, char **argv)
 				z->real = 0;
 				z->imag = 0;
 				n = 0;
-				while (n < 100)
+				while (n < env->estimator_max)
 				{
 					if (sqrt((z->real * z->real) + (z->imag * z->imag)) > (env->real_max - env->real_min))
 						break ;
@@ -150,7 +147,7 @@ int32_t	main(int argc, char **argv)
 	mlx_scroll_hook(mlx, ft_scroll_hook, mlx);
 	mlx_resize_hook(mlx, ft_window_resize_hook, env);
 	// mlx_set_window_size(mlx, env->width, env->height);
-	// mlx_close_hook(mlx, window_exit_hook, env);
+	mlx_close_hook(mlx, window_exit_hook, env);
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
 	return (EXIT_SUCCESS);
