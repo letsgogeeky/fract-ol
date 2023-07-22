@@ -26,4 +26,6 @@ typedef struct s_fractol
     double                  pixel_size;
 }   t_fractol;
 
+t_fractol   *init_env(int argc, char **argv);
+
 #endif

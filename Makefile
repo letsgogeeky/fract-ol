@@ -8,7 +8,7 @@ LIBS := $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm -g -fsanitize=addres
 BACKEND_SRCS := backend/ft_complex/arithmetic.c backend/ft_complex/utils.c backend/fractol.c
 FRONTEND_SRCS := frontend/controls/keyboard.c frontend/controls/mouse.c frontend/controls/window.c \
 	frontend/colors/draw.c
-SRCS := main.c
+SRCS := init.c main.c
 
 OBJS := ${addprefix src/, ${BACKEND_SRCS:.c=.o} ${FRONTEND_SRCS:.c=.o} ${SRCS:.c=.o}}
 
