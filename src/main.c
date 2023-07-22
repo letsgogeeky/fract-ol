@@ -11,12 +11,6 @@ static void ft_error(void)
 	exit(EXIT_FAILURE);
 }
 
-static void ft_pixel(void *img, int x, int y, uint32_t color)
-{
-	mlx_put_pixel(img, x, y, color);
-
-}
-
 int	ft_strlen(const char *c)
 {
 	int	size;
@@ -69,22 +63,23 @@ int32_t	main(int argc, char **argv)
 		}
 	}
 	env->estimator_max = 100;
+	env->width = 1366;
+	env->height = 768;
 	// MLX allows you to define its core behaviour before startup.
 	mlx_set_setting(MLX_MAXIMIZED, true);
+	mlx_set_setting(MLX_STRETCH_IMAGE, true);
 	mlx_t* mlx = mlx_init(WIDTH, HEIGHT, env->name, true);
+	
 	int x;
 	int y;
 	t_complex *z;
 	int n;
 	t_complex *c;
-	double re_min;
-	double	re_max;
-	double im_max;
 	double	pixel_size;
 	double r;
-	re_min = -2;
-	re_max = 1;
-	im_max = 1;
+	env->real_min = -2;
+	env->real_max = 1;
+	env->imaginary_max = 1;
 	z = (t_complex *)malloc(sizeof(t_complex*));
 	c = (t_complex *)malloc(sizeof(t_complex*));
 
@@ -104,15 +99,15 @@ int32_t	main(int argc, char **argv)
 	x = 0;
 	y = 0;
 	r = 23;
-	pixel_size = (double)(re_max - re_min) / mlx->width;
+	pixel_size = (double)(env->real_max - env->real_min) / mlx->width;
 	while (y < mlx->height)
 	{
 		while (x < mlx->width)
 		{
 			if (env->f_type == JULIA)
 			{
-				z->real = re_min + (x * pixel_size);
-				z->imag = im_max - (y * pixel_size);
+				z->real = env->real_min + (x * pixel_size);
+				z->imag = env->imaginary_max - (y * pixel_size);
 				c->real = 0.5;
 				c->imag = 0.3;
 				n = 0;
@@ -124,38 +119,24 @@ int32_t	main(int argc, char **argv)
 					complex_add(z, c);
 					n++;
 				}
-				if (n == env->estimator_max)
-				{
-					ft_pixel(img, x, y, 0x10000005);
-				}
-				else
-				{
-					ft_pixel(img, x, y, 0xF0AA00FF * n);
-				}
+				ft_pixel(img, x, y, n, env);
 			}
 			else if (env->f_type == MANDELBROT)
 			{
-				c->real = re_min + (x * pixel_size);
-				c->imag = im_max - (y * pixel_size);
+				c->real = env->real_min + (x * pixel_size);
+				c->imag = env->imaginary_max - (y * pixel_size);
 				z->real = 0;
 				z->imag = 0;
 				n = 0;
 				while (n < 100)
 				{
-					if (sqrt((z->real * z->real) + (z->imag * z->imag)) > (re_max - re_min))
+					if (sqrt((z->real * z->real) + (z->imag * z->imag)) > (env->real_max - env->real_min))
 						break ;
 					complex_multiply(z);
 					complex_add(z, c);
 					n++;
 				}
-				if (n == 100)
-				{
-					ft_pixel(img, x, y, 0x00000000);
-				}
-				else
-				{
-					ft_pixel(img, x, y, 0xF0AA00FF * n);
-				}
+				ft_pixel(img, x, y, n, env);
 			}
 			x++;
 		}
@@ -167,7 +148,9 @@ int32_t	main(int argc, char **argv)
 	// mlx_loop_hook(mlx, ft_hook, mlx);
 	mlx_key_hook(mlx, ft_key_hook, mlx);
 	mlx_scroll_hook(mlx, ft_scroll_hook, mlx);
-	mlx_resize_hook(mlx, ft_window_resize_hook, mlx);
+	mlx_resize_hook(mlx, ft_window_resize_hook, env);
+	// mlx_set_window_size(mlx, env->width, env->height);
+	// mlx_close_hook(mlx, window_exit_hook, env);
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
 	return (EXIT_SUCCESS);
