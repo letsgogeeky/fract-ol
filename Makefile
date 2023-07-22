@@ -5,12 +5,12 @@ LIBMLX := ./lib/MLX42
 HEADERS := -I ./include -I $(LIBMLX)/include
 LIBS := $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm -g -fsanitize=address
 
-COMPLEX_SRCS := ft_complex/arithmetic.c ft_complex/utils.c
+BACKEND_SRCS := backend/ft_complex/arithmetic.c backend/ft_complex/utils.c
 FRONTEND_SRCS := frontend/controls/keyboard.c frontend/controls/mouse.c frontend/controls/window.c \
 	frontend/colors/draw.c
 SRCS := main.c
 
-OBJS := ${addprefix src/, ${COMPLEX_SRCS:.c=.o} ${FRONTEND_SRCS:.c=.o} ${SRCS:.c=.o}}
+OBJS := ${addprefix src/, ${BACKEND_SRCS:.c=.o} ${FRONTEND_SRCS:.c=.o} ${SRCS:.c=.o}}
 
 
 all: MLX ${NAME}
