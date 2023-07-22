@@ -1,4 +1,4 @@
-#include "ft_complex.h"
+#include "backend.h"
 #include "frontend.h"
 
 // Exit the program as failure.
@@ -71,8 +71,6 @@ int32_t	main(int argc, char **argv)
 	t_complex *z;
 	int n;
 	t_complex *c;
-	double	pixel_size;
-	double r;
 	env->real_min = -2;
 	env->real_max = 1;
 	env->imaginary_max = 1;
@@ -92,47 +90,23 @@ int32_t	main(int argc, char **argv)
 	// Even after the image is being displayed, we can still modify the buffer.
 	x = 0;
 	y = 0;
-	r = 17;
+	env->radius = 20;
 	printf("Width on env = %d\n", env->width);
 	printf("env estimator = %d\n", env->estimator_max);
-	pixel_size = (double)(env->real_max - env->real_min) / env->width;
-	printf("pixel size: %f\n", pixel_size);
+	env->pixel_size = (double)(env->real_max - env->real_min) / env->width;
+	printf("pixel size: %f\n", env->pixel_size);
 	while (y < mlx->height)
 	{
 		while (x < mlx->width)
 		{
 			if (env->f_type == JULIA)
 			{
-				z->real = env->real_min + (x * pixel_size);
-				z->imag = env->imaginary_max - (y * pixel_size);
-				c->real = 0.5;
-				c->imag = 0.3;
-				n = 0;
-				while (n < env->estimator_max)
-				{
-					if (sqrt((z->real * z->real) + (z->imag * z->imag)) > r * r)
-						break ;
-					complex_multiply(z);
-					complex_add(z, c);
-					n++;
-				}
+				n = compute_julia_pixel(env, z, c, x, y);
 				ft_pixel(img, x, y, n, env);
 			}
 			else if (env->f_type == MANDELBROT)
 			{
-				c->real = env->real_min + (x * pixel_size);
-				c->imag = env->imaginary_max - (y * pixel_size);
-				z->real = 0;
-				z->imag = 0;
-				n = 0;
-				while (n < env->estimator_max)
-				{
-					if (sqrt((z->real * z->real) + (z->imag * z->imag)) > (env->real_max - env->real_min))
-						break ;
-					complex_multiply(z);
-					complex_add(z, c);
-					n++;
-				}
+				n = compute_mandelbrot_pixel(env, z, c, x, y);
 				ft_pixel(img, x, y, n, env);
 			}
 			x++;

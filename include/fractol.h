@@ -22,6 +22,8 @@ typedef struct s_fractol
     int                     estimator_max;
     int                     width;
     int                     height;
+    double                  radius;
+    double                  pixel_size;
 }   t_fractol;
 
 #endif
