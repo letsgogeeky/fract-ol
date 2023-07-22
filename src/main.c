@@ -1,20 +1,11 @@
 #include "ft_complex.h"
 #include "frontend.h"
 
-#define WIDTH 1300
-#define HEIGHT 900
-
 // Exit the program as failure.
 static void ft_error(void)
 {
 	fprintf(stderr, "%s", mlx_strerror(mlx_errno));
 	exit(EXIT_FAILURE);
-}
-
-static void ft_pixel(void *img, int x, int y, uint32_t color)
-{
-	mlx_put_pixel(img, x, y, color);
-
 }
 
 int	ft_strlen(const char *c)
@@ -48,8 +39,7 @@ int32_t	main(int argc, char **argv)
 {
 	t_fractol *env;
 
-	env = (t_fractol *)malloc(sizeof(t_fractol *));
-
+	env = (t_fractol *)malloc(sizeof(t_fractol));
 	if (argc < 2)
 	{
 		env->f_type = MANDELBROT;
@@ -68,23 +58,24 @@ int32_t	main(int argc, char **argv)
 			env->name = "Julia Fractol";
 		}
 	}
-	env->estimator_max = 100;
+	env->estimator_max = 70;
+	env->width = 1366;
+	env->height = 960;
 	// MLX allows you to define its core behaviour before startup.
 	mlx_set_setting(MLX_MAXIMIZED, true);
-	mlx_t* mlx = mlx_init(WIDTH, HEIGHT, env->name, true);
+	mlx_set_setting(MLX_STRETCH_IMAGE, true);
+	mlx_t* mlx = mlx_init(env->width, env->height, env->name, true);
+	
 	int x;
 	int y;
 	t_complex *z;
 	int n;
 	t_complex *c;
-	double re_min;
-	double	re_max;
-	double im_max;
 	double	pixel_size;
 	double r;
-	re_min = -2;
-	re_max = 1;
-	im_max = 1;
+	env->real_min = -2;
+	env->real_max = 1;
+	env->imaginary_max = 1;
 	z = (t_complex *)malloc(sizeof(t_complex*));
 	c = (t_complex *)malloc(sizeof(t_complex*));
 
@@ -94,25 +85,26 @@ int32_t	main(int argc, char **argv)
 	/* Do stuff */
 
 	// Create and display the image.
-	mlx_image_t* img = mlx_new_image(mlx, WIDTH, HEIGHT);
+	mlx_image_t* img = mlx_new_image(mlx, env->width, env->height);
 	if (!img || (mlx_image_to_window(mlx, img, 0, 0) < 0))
 		ft_error();
 
 	// Even after the image is being displayed, we can still modify the buffer.
-	// mlx_put_pixel(img, 0, 0, 0xFF0000FF);
-	// ft_pixel(img, 10, 10);
 	x = 0;
 	y = 0;
-	r = 23;
-	pixel_size = (double)(re_max - re_min) / mlx->width;
+	r = 17;
+	printf("Width on env = %d\n", env->width);
+	printf("env estimator = %d\n", env->estimator_max);
+	pixel_size = (double)(env->real_max - env->real_min) / env->width;
+	printf("pixel size: %f\n", pixel_size);
 	while (y < mlx->height)
 	{
 		while (x < mlx->width)
 		{
 			if (env->f_type == JULIA)
 			{
-				z->real = re_min + (x * pixel_size);
-				z->imag = im_max - (y * pixel_size);
+				z->real = env->real_min + (x * pixel_size);
+				z->imag = env->imaginary_max - (y * pixel_size);
 				c->real = 0.5;
 				c->imag = 0.3;
 				n = 0;
@@ -124,38 +116,24 @@ int32_t	main(int argc, char **argv)
 					complex_add(z, c);
 					n++;
 				}
-				if (n == env->estimator_max)
-				{
-					ft_pixel(img, x, y, 0x10000005);
-				}
-				else
-				{
-					ft_pixel(img, x, y, 0xF0AA00FF * n);
-				}
+				ft_pixel(img, x, y, n, env);
 			}
 			else if (env->f_type == MANDELBROT)
 			{
-				c->real = re_min + (x * pixel_size);
-				c->imag = im_max - (y * pixel_size);
+				c->real = env->real_min + (x * pixel_size);
+				c->imag = env->imaginary_max - (y * pixel_size);
 				z->real = 0;
 				z->imag = 0;
 				n = 0;
-				while (n < 100)
+				while (n < env->estimator_max)
 				{
-					if (sqrt((z->real * z->real) + (z->imag * z->imag)) > (re_max - re_min))
+					if (sqrt((z->real * z->real) + (z->imag * z->imag)) > (env->real_max - env->real_min))
 						break ;
 					complex_multiply(z);
 					complex_add(z, c);
 					n++;
 				}
-				if (n == 100)
-				{
-					ft_pixel(img, x, y, 0x00000000);
-				}
-				else
-				{
-					ft_pixel(img, x, y, 0xF0AA00FF * n);
-				}
+				ft_pixel(img, x, y, n, env);
 			}
 			x++;
 		}
@@ -166,6 +144,10 @@ int32_t	main(int argc, char **argv)
 	// NOTE: Do this before calling mlx_loop!
 	// mlx_loop_hook(mlx, ft_hook, mlx);
 	mlx_key_hook(mlx, ft_key_hook, mlx);
+	mlx_scroll_hook(mlx, ft_scroll_hook, mlx);
+	mlx_resize_hook(mlx, ft_window_resize_hook, env);
+	// mlx_set_window_size(mlx, env->width, env->height);
+	mlx_close_hook(mlx, window_exit_hook, env);
 	mlx_loop(mlx);
 	mlx_terminate(mlx);
 	return (EXIT_SUCCESS);
