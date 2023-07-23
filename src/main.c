@@ -21,7 +21,6 @@ void register_hooks(mlx_t *mlx, t_fractol *env)
 	mlx_key_hook(mlx, ft_key_hook, env);
 	mlx_scroll_hook(mlx, ft_scroll_hook, env);
 	mlx_resize_hook(mlx, ft_window_resize_hook, env);
-	// mlx_set_window_size(mlx, env->width, env->height);
 	mlx_close_hook(mlx, window_exit_hook, env);
 }
 
@@ -31,8 +30,8 @@ int32_t	main(int argc, char **argv)
 	t_fractol *env;
 	env = init_env(argc, argv);
 	// MLX allows you to define its core behaviour before startup.
-	mlx_set_setting(MLX_MAXIMIZED, true);
-	mlx_set_setting(MLX_STRETCH_IMAGE, true);
+	// mlx_set_setting(MLX_MAXIMIZED, true);
+	// mlx_set_setting(MLX_STRETCH_IMAGE, true);
 	mlx_t* mlx = mlx_init(env->width, env->height, env->name, true);
 	if (!mlx)
 		ft_error();

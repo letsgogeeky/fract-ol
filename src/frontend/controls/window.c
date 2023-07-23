@@ -8,6 +8,7 @@ void ft_window_resize_hook(int32_t width, int32_t height, void * param)
     printf("%s\n", env->name);
     env->width = width;
     env->height = height;
+    compute_frame(env);
 	printf("width: %d | height: %d\n", width, height);
 }
 

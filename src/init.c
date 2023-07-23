@@ -84,7 +84,7 @@ void    init_color(t_fractol *env)
     env->color_scale->red = 1;
     env->color_scale->green = 1;
     env->color_scale->blue = 1;
-    env->color_scale->transparency = 1;
+    env->color_scale->transparency = 20;
 }
 
 t_fractol   *init_env(int argc, char **argv)
@@ -94,7 +94,7 @@ t_fractol   *init_env(int argc, char **argv)
     env = (t_fractol *)malloc(sizeof(t_fractol));
 	set_env_fractol_mode(env, argc, argv);
     set_env_boundaries(env);
-	env->estimator_max = 300;
+	env->estimator_max = 150;
 	env->width = 1366;
 	env->height = 960;
     env->radius = 30;
