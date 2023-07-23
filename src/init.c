@@ -51,19 +51,33 @@ static void set_env_fractol_mode(t_fractol *env, int argc, char **argv)
 	}
 }
 
+void        set_env_boundaries(t_fractol *env)
+{
+    if (env->f_type == MANDELBROT)
+    {
+        env->real_min = -2.2;
+        env->real_max = 1.9;
+        env->imaginary_max = 1.2;
+    }
+    else if (env->f_type == JULIA)
+    {
+        env->real_min = -2;
+        env->real_max = 1.8;
+        env->imaginary_max = 1.3;
+    }
+}
+
 t_fractol   *init_env(int argc, char **argv)
 {
     t_fractol *env;
 
     env = (t_fractol *)malloc(sizeof(t_fractol));
 	set_env_fractol_mode(env, argc, argv);
+    set_env_boundaries(env);
 	env->estimator_max = 70;
 	env->width = 1366;
 	env->height = 960;
-    env->real_min = -2;
-	env->real_max = 1;
-	env->imaginary_max = 1;
-    env->radius = 20;
+    env->radius = 30;
     env->pixel_size = (double)(env->real_max - env->real_min) / env->width;
     return (env);
 }
