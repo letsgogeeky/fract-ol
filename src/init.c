@@ -58,7 +58,7 @@ void        set_env_boundaries(t_fractol *env)
         env->real_min = -2.2;
         env->real_max = 1.2;
         env->imaginary_max = 1.2;
-        env->imaginary_min = -1.2;
+        env->imaginary_min = -1.4;
     }
     else if (env->f_type == JULIA)
     {
@@ -74,17 +74,17 @@ void    set_zoom(t_fractol *env)
     env->zoom = (t_zoom *)malloc(sizeof(t_zoom));
     env->zoom->real_center = 0;
     env->zoom->imaginary_center = 0;
-    env->zoom->factor = 1;
+    env->zoom->factor = 0.9;
 }
 
 void    init_color(t_fractol *env)
 {
     env->color_scale = (t_color *)malloc(sizeof(t_color));
 
-    env->color_scale->red = 1;
-    env->color_scale->green = 1;
-    env->color_scale->blue = 1;
-    env->color_scale->transparency = 20;
+    env->color_scale->red = 160;
+    env->color_scale->green = 32;
+    env->color_scale->blue = 25;
+    env->color_scale->transparency = 70;
 }
 
 t_fractol   *init_env(int argc, char **argv)
