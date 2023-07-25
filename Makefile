@@ -12,6 +12,16 @@ SRCS := init.c main.c
 
 OBJS := ${addprefix src/, ${BACKEND_SRCS:.c=.o} ${FRONTEND_SRCS:.c=.o} ${SRCS:.c=.o}}
 
+###### CMAKE #####
+ifeq ($(shell uname), Darwin)
+install_cmake:
+	@brew list readline &>/dev/null && echo "cmake already installed" || \
+	( \
+		brew install cmake && \
+		echo "cmake installed" \
+	)
+endif
+##################
 
 all: MLX ${NAME}
 
