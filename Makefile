@@ -15,7 +15,7 @@ OBJS := ${addprefix src/, ${BACKEND_SRCS:.c=.o} ${FRONTEND_SRCS:.c=.o} ${SRCS:.c
 ###### CMAKE #####
 ifeq ($(shell uname), Darwin)
 install_cmake:
-	@brew list readline &>/dev/null && echo "cmake already installed" || \
+	@brew list cmake &>/dev/null && echo "cmake already installed" || \
 	( \
 		brew install cmake && \
 		echo "cmake installed" \
