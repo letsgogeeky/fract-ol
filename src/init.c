@@ -56,15 +56,35 @@ void        set_env_boundaries(t_fractol *env)
     if (env->f_type == MANDELBROT)
     {
         env->real_min = -2.2;
-        env->real_max = 1.9;
+        env->real_max = 1.2;
         env->imaginary_max = 1.2;
+        env->imaginary_min = -1.4;
     }
     else if (env->f_type == JULIA)
     {
         env->real_min = -2;
         env->real_max = 1.8;
         env->imaginary_max = 1.3;
+        env->imaginary_min = -1.5;
     }
+}
+
+void    set_zoom(t_fractol *env)
+{
+    env->zoom = (t_zoom *)malloc(sizeof(t_zoom));
+    env->zoom->real_center = 0;
+    env->zoom->imaginary_center = 0;
+    env->zoom->factor = 0.9;
+}
+
+void    init_color(t_fractol *env)
+{
+    env->color_scale = (t_color *)malloc(sizeof(t_color));
+
+    env->color_scale->red = 160;
+    env->color_scale->green = 32;
+    env->color_scale->blue = 25;
+    env->color_scale->transparency = 70;
 }
 
 t_fractol   *init_env(int argc, char **argv)
@@ -74,10 +94,13 @@ t_fractol   *init_env(int argc, char **argv)
     env = (t_fractol *)malloc(sizeof(t_fractol));
 	set_env_fractol_mode(env, argc, argv);
     set_env_boundaries(env);
-	env->estimator_max = 70;
+	env->estimator_max = 150;
 	env->width = 1366;
 	env->height = 960;
     env->radius = 30;
-    env->pixel_size = (double)(env->real_max - env->real_min) / env->width;
+    set_zoom(env);
+    env->pixel_size_x = (double)(env->real_max - env->real_min) / env->width;
+    env->pixel_size_y = (double)(env->imaginary_max - env->imaginary_min) / env->height;
+    init_color(env);
     return (env);
 }

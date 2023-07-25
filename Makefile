@@ -1,13 +1,13 @@
 NAME:= fractol
-CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code
+CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -g -O3 -march=corei7 -funroll-loops
 LIBMLX := ./lib/MLX42
 
 HEADERS := -I ./include -I $(LIBMLX)/include
-LIBS := $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm -g -fsanitize=address
+LIBS := $(LIBMLX)/build/libmlx42.a -ldl -lglfw -pthread -lm -fsanitize=address -flto -framework Cocoa -framework OpenGL -framework IOKit
 
 BACKEND_SRCS := backend/ft_complex/arithmetic.c backend/ft_complex/utils.c backend/fractol.c
 FRONTEND_SRCS := frontend/controls/keyboard.c frontend/controls/mouse.c frontend/controls/window.c \
-	frontend/colors/draw.c
+	frontend/colors/draw.c frontend/colors/encoders.c
 SRCS := init.c main.c
 
 OBJS := ${addprefix src/, ${BACKEND_SRCS:.c=.o} ${FRONTEND_SRCS:.c=.o} ${SRCS:.c=.o}}
@@ -30,3 +30,5 @@ clean:
 
 fclean: clean
 	rm -f fractol
+
+re: fclean all
