@@ -7,8 +7,8 @@
 
 typedef struct s_complex
 {
-    double real;
-    double imag;
+    float real;
+    float imag;
 }   t_complex;
 
 void        complex_multiply(t_complex *complex);

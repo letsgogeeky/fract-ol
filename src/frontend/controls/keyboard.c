@@ -35,9 +35,9 @@ void	control_transparency(mlx_key_data_t key, t_fractol *env)
 void	control_details(mlx_key_data_t key, t_fractol *env)
 {
 	if (key.modifier != MLX_CONTROL)
-			env->estimator_max += 20;
-	else if (env->estimator_max > 30)
-			env->estimator_max -= 20;
+			env->estimator_max += 5;
+	else if (env->estimator_max > 5)
+			env->estimator_max -= 5;
 }
 
 void ft_key_hook(mlx_key_data_t key, void * param)

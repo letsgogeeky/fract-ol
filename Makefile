@@ -1,5 +1,5 @@
 NAME:= fractol
-CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -g -O3 -march=corei7 -funroll-loops
+CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -g -O3 -march=corei7 -funroll-loops -pthread
 LIBMLX := ./lib/MLX42
 
 HEADERS := -I ./include -I $(LIBMLX)/include

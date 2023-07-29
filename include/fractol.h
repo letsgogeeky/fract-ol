@@ -17,6 +17,8 @@ typedef struct s_zoom
     double  real_center;
     double  imaginary_center;
     double  factor;
+    double  xpos;
+    double  ypos;
 }   t_zoom;
 
 typedef struct s_color
@@ -31,19 +33,19 @@ typedef struct s_fractol
 {
     enum FractolTypeEnum    f_type;
     char                    *name;
-    double                  real_min;
-    double                  real_max;
-    double                  imaginary_min;
-    double                  imaginary_max;
+    float                  real_min;
+    float                  real_max;
+    float                  imaginary_min;
+    float                  imaginary_max;
     int                     estimator_max;
     int                     width;
     int                     height;
-    double                  radius;
-    double                  pixel_size_x;
-    double                  pixel_size_y;
+    float                  radius;
+    float                  pixel_size;
     t_zoom                  *zoom;
     t_color                 *color_scale;
     void                    *current_frame;
+    mlx_t                   *mlx;
 }   t_fractol;
 
 t_fractol   *init_env(int argc, char **argv);
