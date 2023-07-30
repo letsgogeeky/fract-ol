@@ -8,7 +8,7 @@ void mouse_scroll_hook(double delta_x, double delta_y, void * param)
     // double interpolation;
     
     env = (t_fractol *)param;
-    env->zoom->factor = fabs(delta_y) * env->pixel_size;
+    env->zoom->factor = fabs(delta_y / 10) * env->pixel_size;
     env->zoom->factor = 0.1;
     printf("%f\n", delta_x);
     // if (delta_y < 0)
@@ -29,7 +29,7 @@ void mouse_scroll_hook(double delta_x, double delta_y, void * param)
         env->imaginary_min += ((env->imaginary_max- env->imaginary_min) * env->zoom->factor);
         env->imaginary_max -= ((env->imaginary_max- env->imaginary_min) * env->zoom->factor);
     }
-    env->pixel_size = (double)(env->real_max - env->real_min) / env->width;
+    update_pixel_size(env);
     print_boundaries(env);
     // env->pixel_size += env->zoom->factor;
     

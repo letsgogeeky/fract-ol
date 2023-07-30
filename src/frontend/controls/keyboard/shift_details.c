@@ -6,4 +6,5 @@ void	control_details(mlx_key_data_t key, t_fractol *env)
 			env->estimator_max += 5;
 	else if (env->estimator_max > 5)
 			env->estimator_max -= 5;
+    compute_frame(env);
 }

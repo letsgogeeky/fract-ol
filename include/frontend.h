@@ -19,10 +19,10 @@ void	control_green(mlx_key_data_t key, t_fractol *env);
 void	control_blue(mlx_key_data_t key, t_fractol *env);
 void	control_transparency(mlx_key_data_t key, t_fractol *env);
 
-void	go_left(mlx_key_data_t key, t_fractol *env);
-void	go_right(mlx_key_data_t key, t_fractol *env);
-void	go_up(mlx_key_data_t key, t_fractol *env);
-void	go_down(mlx_key_data_t key, t_fractol *env);
+void	go_left(t_fractol *env);
+void	go_right(t_fractol *env);
+void	go_up(t_fractol *env);
+void	go_down(t_fractol *env);
 
 void	control_details(mlx_key_data_t key, t_fractol *env);
 
