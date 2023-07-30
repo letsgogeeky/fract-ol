@@ -55,7 +55,7 @@ void        set_env_boundaries(t_fractol *env)
 {
     if (env->f_type == MANDELBROT)
     {
-        env->real_min = -3;
+        env->real_min = -2;
         env->real_max = 0.5;
         env->imaginary_max = 1.2;
         env->imaginary_min = -1.5;
@@ -67,6 +67,7 @@ void        set_env_boundaries(t_fractol *env)
         env->imaginary_max = 1.3;
         env->imaginary_min = -1.5;
     }
+	// printf("REAL MAX AT INIT: %f\n", env->real_max);
 }
 
 void    set_zoom(t_fractol *env)

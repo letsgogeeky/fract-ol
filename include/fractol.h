@@ -33,15 +33,15 @@ typedef struct s_fractol
 {
     enum FractolTypeEnum    f_type;
     char                    *name;
-    float                  real_min;
-    float                  real_max;
-    float                  imaginary_min;
-    float                  imaginary_max;
+    double                  real_min;
+    double                  real_max;
+    double                  imaginary_min;
+    double                  imaginary_max;
     int                     estimator_max;
     int                     width;
     int                     height;
-    float                  radius;
-    float                  pixel_size;
+    double                  radius;
+    double                  pixel_size;
     t_zoom                  *zoom;
     t_color                 *color_scale;
     void                    *current_frame;
