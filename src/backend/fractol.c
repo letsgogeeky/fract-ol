@@ -11,7 +11,7 @@ int compute_mandelbrot_pixel(t_fractol *env, t_complex *z, t_complex *c, uint32_
     n = 0;
     while (n < env->estimator_max)
     {
-        if (sqrt((z->real * z->real) + (z->imag * z->imag)) > (env->real_max - env->real_min))
+        if (sqrt((z->real * z->real) + (z->imag * z->imag)) > 2)
             break ;
         complex_multiply(z);
         complex_add(z, c);
