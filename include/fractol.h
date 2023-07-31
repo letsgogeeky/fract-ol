@@ -45,8 +45,9 @@ typedef struct s_fractol
     float                   shift_val;
     t_zoom                  *zoom;
     t_color                 *color_scale;
-    void                    *current_frame;
+    mlx_image_t             *current_frame;
     mlx_t                   *mlx;
+	bool					should_draw;
 }   t_fractol;
 
 typedef void    (*t_fractol_loop_func)(void *param);

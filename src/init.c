@@ -103,5 +103,6 @@ t_fractol   *init_env(int argc, char **argv)
     set_zoom(env);
     env->pixel_size = (double)(env->real_max - env->real_min) / env->width;
     init_color(env);
+	env->should_draw = true;
     return (env);
 }

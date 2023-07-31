@@ -15,14 +15,17 @@ void mouse_scroll_hook(double delta_x, double delta_y, void * param)
     env = (t_fractol *)param;
     // env->zoom->factor = fabs(delta_y) * 50;
     // env->zoom->factor = 0.05;
-    printf("%f\n", delta_x);
+    // printf("%f\n", delta_x);
+    printf("#");
+	fflush(stdout);
+	(void) delta_x;
     if (delta_y > 0)
         env->zoom->factor = 0.97;
     else
         env->zoom->factor = 1.03;
     mouse_real = env->zoom->xpos / (env->width / (env->real_max - env->real_min)) + env->real_min;
     mouse_imaginary = env->zoom->ypos / (env->height / (env->imaginary_max - env->imaginary_min)) + env->imaginary_min;
-    printf("Mouse: Real = %f || Imaginary = %f\n", mouse_real, mouse_imaginary);
+    // printf("Mouse: Real = %f || Imaginary = %f\n", mouse_real, mouse_imaginary);
     interpolation = 1.0 / env->zoom->factor;
     env->real_min = interpolate(mouse_real, env->real_min, interpolation);
     env->real_max = interpolate(mouse_real, env->real_max, interpolation);
@@ -43,7 +46,8 @@ void mouse_scroll_hook(double delta_x, double delta_y, void * param)
     //     env->imaginary_max -= ((env->imaginary_max- env->imaginary_min) * env->zoom->factor);
     // }
     update_pixel_size(env);
-    print_boundaries(env);
+	env->should_draw = true;
+    // print_boundaries(env);
     // env->pixel_size += env->zoom->factor;
     
     

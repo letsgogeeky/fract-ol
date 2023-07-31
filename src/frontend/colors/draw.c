@@ -33,6 +33,10 @@ void compute_frame(t_fractol *env)
 	int n;
 	t_complex *c;
 
+	if (!env->should_draw)
+		return ;
+	printf("compute frame\n");
+	fflush(stdout);
 	img = (mlx_image_t *)env->current_frame;
 	z = (t_complex *)malloc(sizeof(t_complex*));
 	c = (t_complex *)malloc(sizeof(t_complex*));
@@ -57,4 +61,5 @@ void compute_frame(t_fractol *env)
 		x = 0;
 		y++;
 	}
+	env->should_draw = false;
 }

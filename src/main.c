@@ -39,6 +39,7 @@ int32_t	main(int argc, char **argv)
 	mlx_image_t* img = mlx_new_image(mlx, env->width, env->height);
 	if (!img || (mlx_image_to_window(mlx, img, 0, 0) < 0))
 		ft_error();
+
 	env->current_frame = img;
 	// Even after the image is being displayed, we can still modify the buffer.
 	print_env(env);
