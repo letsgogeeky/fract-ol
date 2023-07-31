@@ -42,10 +42,10 @@ int32_t	main(int argc, char **argv)
 	env->current_frame = img;
 	// Even after the image is being displayed, we can still modify the buffer.
 	print_env(env);
-	compute_frame(env);
+	// compute_frame(env);
 	// Register a hook and pass mlx as an optional param.
 	// NOTE: Do this before calling mlx_loop!
-	// mlx_loop_hook(mlx, ft_hook, mlx);
+	mlx_loop_hook(mlx, (t_fractol_loop_func)compute_frame, env);
 	register_hooks(mlx, env);
 	mlx_loop(mlx);
 	mlx_terminate(mlx);

@@ -55,10 +55,10 @@ void        set_env_boundaries(t_fractol *env)
 {
     if (env->f_type == MANDELBROT)
     {
-        env->real_min = -2;
-        env->real_max = 0.5;
-        env->imaginary_max = 1.2;
-        env->imaginary_min = -1.5;
+        env->real_min = -2.5;
+        env->real_max = 1.3;
+        env->imaginary_max = 1.5;
+        env->imaginary_min = -4;
     }
     else if (env->f_type == JULIA)
     {
@@ -99,6 +99,7 @@ t_fractol   *init_env(int argc, char **argv)
 	env->width = 1366;
 	env->height = 960;
     env->radius = 30;
+	env->shift_val = 0.05;
     set_zoom(env);
     env->pixel_size = (double)(env->real_max - env->real_min) / env->width;
     init_color(env);

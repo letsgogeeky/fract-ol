@@ -42,11 +42,14 @@ typedef struct s_fractol
     int                     height;
     double                  radius;
     double                  pixel_size;
+    float                   shift_val;
     t_zoom                  *zoom;
     t_color                 *color_scale;
     void                    *current_frame;
     mlx_t                   *mlx;
 }   t_fractol;
+
+typedef void    (*t_fractol_loop_func)(void *param);
 
 t_fractol   *init_env(int argc, char **argv);
 
