@@ -22,4 +22,5 @@ int         compute_julia_pixel(t_fractol *env, t_complex *z, \
                                 t_complex *c, uint32_t x, uint32_t y);
 
 void    print_boundaries(t_fractol *env);
+void    terminate_app(t_fractol *env);
 #endif

@@ -64,4 +64,6 @@ void ft_key_hook(mlx_key_data_t key, void * param)
 		control_details(key, env);
 	else if (is_arrow_key(key))
         control_arrows(key, env);
+    else if (key.key == MLX_KEY_ESCAPE)
+        terminate_app(env);
 }
