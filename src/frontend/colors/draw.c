@@ -33,7 +33,7 @@ void compute_frame(t_fractol *env)
 	int n;
 	t_complex *c;
 
-	if (!env->should_draw)
+	if (env->should_draw == false)
 		return ;
 	printf("compute frame\n");
 	fflush(stdout);

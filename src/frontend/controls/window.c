@@ -25,6 +25,8 @@ void window_exit_hook(void *param)
     t_fractol *env;
 
     env = (t_fractol *)param;
-    free(env->name);
+    mlx_delete_image(env->mlx, env->current_frame);
+    mlx_terminate(env->mlx);
     free(env);
+    exit(0);
 }

@@ -82,9 +82,9 @@ void    init_color(t_fractol *env)
 {
     env->color_scale = (t_color *)malloc(sizeof(t_color));
 
-    env->color_scale->red = 160;
-    env->color_scale->green = 32;
-    env->color_scale->blue = 25;
+    env->color_scale->red = 13;
+    env->color_scale->green = 0;
+    env->color_scale->blue = 255;
     env->color_scale->transparency = 70;
 }
 

@@ -33,7 +33,7 @@ void    control_arrows(mlx_key_data_t key, t_fractol *env)
 	else if (key.key == MLX_KEY_DOWN)
 		go_down(env);
     update_pixel_size(env);
-    // compute_frame(env);
+    env->should_draw = true;
 }
 
 void    control_colors(mlx_key_data_t key, t_fractol *env)
@@ -46,7 +46,7 @@ void    control_colors(mlx_key_data_t key, t_fractol *env)
 		control_blue(key, env);
 	else if (key.key == MLX_KEY_A)
 		control_transparency(key, env);
-    // compute_frame(env);
+    env->should_draw = true;
 }
 
 void ft_key_hook(mlx_key_data_t key, void * param)
@@ -64,5 +64,4 @@ void ft_key_hook(mlx_key_data_t key, void * param)
 		control_details(key, env);
 	else if (is_arrow_key(key))
         control_arrows(key, env);
-	env->should_draw = true;
 }

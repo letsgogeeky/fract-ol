@@ -49,6 +49,5 @@ int32_t	main(int argc, char **argv)
 	mlx_loop_hook(mlx, (t_fractol_loop_func)compute_frame, env);
 	register_hooks(mlx, env);
 	mlx_loop(mlx);
-	mlx_terminate(mlx);
 	return (EXIT_SUCCESS);
 }
