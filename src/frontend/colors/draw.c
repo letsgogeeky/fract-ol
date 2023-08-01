@@ -1,7 +1,6 @@
 #include "frontend.h"
 
-
-void ft_pixel(void *img, int x, int y, int32_t estimator, t_fractol *env)
+void smash_pixel(int x, int y, int32_t estimator, t_fractol *env)
 {
 	int color;
 
@@ -15,8 +14,11 @@ void ft_pixel(void *img, int x, int y, int32_t estimator, t_fractol *env)
 		estimator = estimator * 100;
 		color *= estimator;
 	}
-	mlx_put_pixel(img, x, y, color);
+	env->border[y][x] = color;
+	mlx_put_pixel(env->current_frame, x, y, color);
 }
+
+
 void draw_julia(t_fractol *env)
 {
 	int x;
@@ -35,7 +37,7 @@ void draw_julia(t_fractol *env)
 		while (x < env->width)
 		{
 			n = compute_julia_pixel(env, z, c, x, y);
-			ft_pixel(env->current_frame, x, y, n, env);
+			smash_pixel(x, y, n, env);
 			x++;
 		}
 		x = 0;
@@ -62,14 +64,47 @@ void draw_mandelbrot(t_fractol *env)
 		while (x < env->width)
 		{
 			n = compute_mandelbrot_pixel(env, z, c, x, y);
-			ft_pixel(env->current_frame, x, y, n, env);
+			smash_pixel(x, y, n, env);
 			x++;
 		}
 		x = 0;
 		y++;
 	}
+	
 	free(z);
 	free(c);
+}
+
+void	draw_border(t_fractol *env)
+{
+	int	x;
+	int	y;
+
+	x = 0;
+	y = 0;
+	while (y < env->height)
+	{
+		while (x < env->width)
+		{
+			if (env->border[y][x] == 0x000000FF)
+			{
+				if (x - 1 > 0 && x + 1 < env->width && y - 1 > 0 && y + 1 < env->height )
+				{
+					if (env->border[y][x + 1] != 0x000000FF)
+						mlx_put_pixel(env->current_frame, x + 1, y, 0xFFFFFFFF);
+					else if (env->border[y][x - 1] != 0x000000FF)
+						mlx_put_pixel(env->current_frame, x - 1, y, 0xFFFFFFFF);
+					else if (env->border[y + 1][x] != 0x000000FF)
+						mlx_put_pixel(env->current_frame, x, y + 1, 0xFFFFFFFF);
+					else if (env->border[y - 1][x] != 0x000000FF)
+						mlx_put_pixel(env->current_frame, x, y - 1, 0xFFFFFFFF);
+				}
+			}
+			x++;
+		}
+		x = 0;
+		y++;
+	}
 }
 
 void compute_frame(t_fractol *env)

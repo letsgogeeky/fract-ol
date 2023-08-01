@@ -66,4 +66,6 @@ void ft_key_hook(mlx_key_data_t key, void * param)
         control_arrows(key, env);
     else if (key.key == MLX_KEY_ESCAPE)
         terminate_app(env);
+    else if (key.key == MLX_KEY_0 && key.action == MLX_RELEASE)
+        draw_border(env);
 }

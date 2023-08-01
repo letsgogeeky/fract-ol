@@ -90,9 +90,11 @@ void    init_color(t_fractol *env)
 
 t_fractol   *init_env(int argc, char **argv)
 {
-    t_fractol *env;
+    t_fractol	*env;
+	int			i;
 
     env = (t_fractol *)malloc(sizeof(t_fractol));
+	
 	set_env_fractol_mode(env, argc, argv);
     set_env_boundaries(env);
 	env->estimator_max = 25;
@@ -100,6 +102,13 @@ t_fractol   *init_env(int argc, char **argv)
 	env->height = 960;
     env->radius = 30;
 	env->shift_val = 0.05;
+	env->border = (int **)malloc(env->height * sizeof(int*));
+	i = 0;
+	while (i < env->height)
+	{
+		env->border[i] = (int *)malloc(env->width * sizeof(int));
+		i++;
+	}
     set_zoom(env);
     env->pixel_size = (double)(env->real_max - env->real_min) / env->width;
     init_color(env);

@@ -47,6 +47,7 @@ typedef struct s_fractol
     t_color                 *color_scale;
     mlx_image_t             *current_frame;
     mlx_t                   *mlx;
+    int                     **border;
 	bool					should_draw;
 }   t_fractol;
 
