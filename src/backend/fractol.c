@@ -26,8 +26,6 @@ int compute_julia_pixel(t_fractol *env, t_complex *z, t_complex *c, uint32_t x, 
 
     z->real = env->real_min + (x * env->pixel_size);
     z->imag = env->imaginary_max - (y * env->pixel_size);
-    c->real = -0.74543;
-    c->imag = 0.11301;
     n = 0;
     while (n < env->estimator_max)
     {
