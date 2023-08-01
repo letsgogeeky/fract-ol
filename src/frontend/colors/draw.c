@@ -70,7 +70,6 @@ void draw_mandelbrot(t_fractol *env)
 		x = 0;
 		y++;
 	}
-	
 	free(z);
 	free(c);
 }

@@ -13,6 +13,9 @@ static void print_env(t_fractol *env)
 	printf("Width on env = %d\n", env->width);
 	printf("env estimator = %d\n", env->estimator_max);
 	printf("pixel size real: %f\n", env->pixel_size);
+	printf("Real Min: %f        || Real Max: %f\n", env->real_min, env->real_max);
+    printf("Imaginary Min: %f   || Imaginary Max: %f\n", env->imaginary_min, env->imaginary_max);
+	printf("Zoom factor: %f\n", env->zoom->factor);
 }
 
 void register_hooks(mlx_t *mlx, t_fractol *env)
@@ -28,10 +31,8 @@ void register_hooks(mlx_t *mlx, t_fractol *env)
 int32_t	main(int argc, char **argv)
 {
 	t_fractol *env;
+	
 	env = init_env(argc, argv);
-	// MLX allows you to define its core behaviour before startup.
-	// mlx_set_setting(MLX_MAXIMIZED, true);
-	// mlx_set_setting(MLX_STRETCH_IMAGE, true);
 	mlx_t* mlx = mlx_init(env->width, env->height, env->name, true);
 	if (!mlx)
 		ft_error();
@@ -39,13 +40,8 @@ int32_t	main(int argc, char **argv)
 	mlx_image_t* img = mlx_new_image(mlx, env->width, env->height);
 	if (!img || (mlx_image_to_window(mlx, img, 0, 0) < 0))
 		ft_error();
-
 	env->current_frame = img;
-	// Even after the image is being displayed, we can still modify the buffer.
 	print_env(env);
-	// compute_frame(env);
-	// Register a hook and pass mlx as an optional param.
-	// NOTE: Do this before calling mlx_loop!
 	mlx_loop_hook(mlx, (t_fractol_loop_func)compute_frame, env);
 	register_hooks(mlx, env);
 	mlx_loop(mlx);
