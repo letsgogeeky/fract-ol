@@ -16,6 +16,9 @@ compile_mlx()
 		rm -rf ../../cmake-3.26.2-macos10.10-universal
 	fi
 }
+if [[ ! -d ./lib ]]; then
+	mkdir ./lib
+fi
 
 if [[ -d ./lib/MLX42 ]]; then
 	echo -e "\033[1;33m./lib/MLX42/ Exists\033[0m";
