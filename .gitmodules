@@ -1,0 +1,3 @@
+[submodule "lib/ft-baselib"]
+	path = lib/ft-baselib
+	url = git@github.com:letsgogeeky/ft-baselib.git

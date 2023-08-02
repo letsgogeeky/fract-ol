@@ -4,6 +4,7 @@
 #include <math.h>
 #include <stdlib.h>
 #include "fractol.h"
+#include "baselib.h"
 
 typedef struct s_complex
 {

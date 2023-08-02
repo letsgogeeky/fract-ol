@@ -33,6 +33,7 @@ static void set_env_fractol_mode(t_fractol *env, int argc, char **argv)
 {
     if (argc < 2)
 	{
+		ft_printf("Bad things happened here...!");
 		free(env);
 		exit(0);
 	}
