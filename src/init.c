@@ -33,8 +33,8 @@ static void set_env_fractol_mode(t_fractol *env, int argc, char **argv)
 {
     if (argc < 2)
 	{
-		env->f_type = MANDELBROT;
-		env->name = "Mandelbrot Fractol";
+		free(env);
+		exit(0);
 	}
 	else
 	{
