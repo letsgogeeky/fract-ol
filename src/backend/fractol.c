@@ -4,14 +4,14 @@ int compute_mandelbrot_pixel(t_fractol *env, t_complex *z, t_complex *c, uint32_
 {
     int n;
 
-    c->real = env->real_min + (x * env->pixel_size_x);
-    c->imag = env->imaginary_max - (y * env->pixel_size_y);
+    c->real = env->real_min + (x * env->pixel_size);
+    c->imag = env->imaginary_max - (y * env->pixel_size);
     z->real = 0;
     z->imag = 0;
     n = 0;
     while (n < env->estimator_max)
     {
-        if (sqrt((z->real * z->real) + (z->imag * z->imag)) > (env->real_max - env->real_min))
+        if (sqrt((z->real * z->real) + (z->imag * z->imag)) > 2)
             break ;
         complex_multiply(z);
         complex_add(z, c);
@@ -24,10 +24,8 @@ int compute_julia_pixel(t_fractol *env, t_complex *z, t_complex *c, uint32_t x, 
 {
     int n;
 
-    z->real = env->real_min + (x * env->pixel_size_x);
-    z->imag = env->imaginary_max - (y * env->pixel_size_y);
-    c->real = -0.74543;
-    c->imag = 0.11301;
+    z->real = env->real_min + (x * env->pixel_size);
+    z->imag = env->imaginary_max - (y * env->pixel_size);
     n = 0;
     while (n < env->estimator_max)
     {
