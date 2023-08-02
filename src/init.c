@@ -33,7 +33,10 @@ static void set_env_fractol_mode(t_fractol *env, int argc, char **argv)
 {
     if (argc < 2)
 	{
-		ft_printf("Bad things happened here...!");
+		ft_printf("Please specify a Fractal of the following:\n");
+		ft_printf("1. `mandelbrot`\n");
+		ft_printf("2. `julia`\n");
+		ft_printf("3. `kock` is shortcut for Koch Snowflake\n");
 		free(env);
 		exit(0);
 	}
