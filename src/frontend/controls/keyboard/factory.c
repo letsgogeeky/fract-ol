@@ -4,10 +4,7 @@ bool    is_arrow_key(mlx_key_data_t key)
 {
     if (key.key == MLX_KEY_LEFT || key.key == MLX_KEY_RIGHT \
         || key.key == MLX_KEY_UP || key.key == MLX_KEY_DOWN)
-    {
-        if(key.action == MLX_RELEASE)
-            return (true);
-    }
+        return (true);
     return (false);
 }
 

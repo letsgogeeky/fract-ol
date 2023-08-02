@@ -21,5 +21,7 @@ void	show_help(t_fractol *env)
 	ft_printf("D (increase) or CNTRL + D (decrease) :: Controls level of Details in the fractal\n");
 	ft_printf("0 :: (zero) Apply border finding algorithm\n");
 	ft_printf("---------------------------------------\n");
+	ft_printf("Use the 4 arrow keys to explore left, right, up, & down the complex plane\n");
+	ft_printf("---------------------------------------\n");
 	print_env(env);
 }
