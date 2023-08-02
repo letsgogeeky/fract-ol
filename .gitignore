@@ -114,3 +114,4 @@ venv/
 .venv
 ./fractol
 fractol
+lib/MLX42/

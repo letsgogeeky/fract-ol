@@ -23,15 +23,15 @@ all: MLX ${NAME}
 	@$(CC) $(CFLAGS) $(HEADERS) -o $@ -c $<
 
 ${NAME}: ${OBJS}
-	@$(CC) $(OBJS) $(LIBS) $(LDFLAGS) -o $(NAME) && echo "Successful build...!"
+	@$(CC) $(OBJS) $(LIBS) $(HEADERS) $(LDFLAGS) -o $(NAME) && echo "Successful build...!"
 
 
-MLX: DEPS
-	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
-
-DEPS:
+MLX:
 	chmod 755 setup_libs.sh
 	sh setup_libs.sh
+
+rmlib:
+	rm -rf lib/MLX42
 
 clean:
 	@rm -rf $(OBJS)
@@ -40,3 +40,5 @@ fclean: clean
 	rm -f fractol
 
 re: fclean all
+
+.PHONY: all rmlib clean fclean re
