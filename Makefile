@@ -1,5 +1,5 @@
 NAME:= fractol
-CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -g -O3 -march=corei7 -funroll-loops
+CFLAGS	:= -Wextra -Wall -Werror -g -O3 -funroll-loops
 LIBMLX := ./lib/MLX42
 
 HEADERS := -I ./include -I $(LIBMLX)/include
@@ -15,26 +15,21 @@ OBJS := ${addprefix src/, ${BACKEND_SRCS:.c=.o} ${FRONTEND_SRCS:.c=.o} ${SRCS:.c
 all: MLX ${NAME}
 
 %.o: %.c
-	@$(CC) $(CFLAGS) -o $@ -c $< $(HEADERS)
+	@$(CC) $(CFLAGS) $(HEADERS) -o $@ -c $<
 
 ${NAME}: ${OBJS}
-	@$(CC) $(OBJS) $(LIBS) $(LDFLAGS) $(HEADERS) -o $(NAME) && echo "Successful build...!"
+	@$(CC) $(OBJS) $(LIBS) $(LDFLAGS) -o $(NAME) && echo "Successful build...!"
 
 
-MLX:
+MLX: DEPS
 	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
-# echo "Installing GLFW"
-# curl -LO https://github.com/glfw/glfw/releases/download/3.3.8/glfw-3.3.8.bin.MACOS.zip
-# unzip glfw-3.3.8.bin.MACOS.zip
-# rm glfw-3.3.8.bin.MACOS.zip
-# mv glfw-3.3.8.bin.MACOS/lib-universal glfw-3.3.8.bin.MACOS/glfw_lib
-# mv glfw-3.3.8.bin.MACOS/glfw_lib ./lib/MLX42/
-# rm -rf glfw-3.3.8.bin.MACOS
 
+DEPS:
+	chmod 755 setup_libs.sh
+	sh setup_libs.sh
 
 clean:
 	@rm -rf $(OBJS)
-	@rm -rf $(LIBMLX)/build
 
 fclean: clean
 	rm -f fractol
