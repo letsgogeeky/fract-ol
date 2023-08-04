@@ -5,8 +5,8 @@ static void print_env(t_fractol *env)
 	ft_printf("Width on env = %d\n", env->width);
 	ft_printf("env estimator = %d\n", env->estimator_max);
 	ft_printf("pixel size real: %f\n", env->pixel_size);
-	ft_printf("Real Min: %f        || Real Max: %f\n", env->real_min, env->real_max);
-    ft_printf("Imaginary Min: %f   || Imaginary Max: %f\n", env->imaginary_min, env->imaginary_max);
+	ft_printf("Real Min: %f || Real Max: %f\n", env->real_min, env->real_max);
+    ft_printf("Imaginary Min: %f || Imaginary Max: %f\n", env->imaginary_min, env->imaginary_max);
 	ft_printf("Zoom factor: %f\n", env->zoom->factor);
 }
 
