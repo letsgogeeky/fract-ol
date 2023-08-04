@@ -21,7 +21,8 @@
 enum FractolTypeEnum
 {
     MANDELBROT,
-    JULIA
+    JULIA,
+	KOCH
 };
 
 typedef struct s_zoom

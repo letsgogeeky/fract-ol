@@ -40,6 +40,11 @@ static void set_env_fractol_mode(t_fractol *env, int argc, char **argv)
 			env->f_type = JULIA;
 			env->name = "Julia Fractol";
 		}
+		else if (is_equal_str(argv[1], "koch"))
+		{
+			env->f_type = KOCH;
+			env->name = "KOCH SNOWFLAKE Fractol";
+		}
 	}
 }
 
