@@ -12,7 +12,7 @@ BACKEND_SRCS := backend/ft_complex/arithmetic.c backend/fractol.c \
 FRONTEND_SRCS := frontend/controls/mouse.c frontend/controls/window.c \
 	frontend/colors/draw.c frontend/colors/encoders.c frontend/controls/keyboard/factory.c \
 	frontend/controls/keyboard/shift_color.c frontend/controls/keyboard/shift_details.c \
-	frontend/controls/keyboard/shift_range.c
+	frontend/controls/keyboard/shift_range.c frontend/logger.c
 
 SRCS := init.c main.c
 

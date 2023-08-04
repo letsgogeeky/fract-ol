@@ -1,18 +1,6 @@
 #include "backend.h"
 #include "frontend.h"
 
-int	ft_strlen(const char *c)
-{
-	int	size;
-
-	size = 0;
-	while (c[size] != '\0')
-	{
-		size++;
-	}
-	return (size);
-}
-
 int is_equal_str(char *s1, char *s2)
 {
 	int	i;
@@ -60,9 +48,9 @@ void        set_env_boundaries(t_fractol *env)
     if (env->f_type == MANDELBROT)
     {
         env->real_min = -2.5;
-        env->real_max = 1.3;
+        env->real_max = 2.5;
         env->imaginary_max = 1.5;
-        env->imaginary_min = -4;
+        env->imaginary_min = -1.5;
     }
     else if (env->f_type == JULIA)
     {
@@ -103,9 +91,9 @@ t_fractol   *init_env(int argc, char **argv)
     set_env_boundaries(env);
 	env->estimator_max = 25;
 	env->width = 1366;
-	env->height = 960;
+	env->height = 768;
     env->radius = 30;
-	env->shift_val = 0.05;
+	env->shift_val = 0.04;
 	env->border = (int **)malloc(env->height * sizeof(int*));
 	i = 0;
 	while (i < env->height)

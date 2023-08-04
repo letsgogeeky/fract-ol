@@ -4,10 +4,7 @@ bool    is_arrow_key(mlx_key_data_t key)
 {
     if (key.key == MLX_KEY_LEFT || key.key == MLX_KEY_RIGHT \
         || key.key == MLX_KEY_UP || key.key == MLX_KEY_DOWN)
-    {
-        if(key.action == MLX_RELEASE)
-            return (true);
-    }
+        return (true);
     return (false);
 }
 
@@ -68,4 +65,6 @@ void ft_key_hook(mlx_key_data_t key, void * param)
         terminate_app(env);
     else if (key.key == MLX_KEY_0 && key.action == MLX_RELEASE)
         draw_border(env);
+	else if (key.key == MLX_KEY_H && key.action == MLX_RELEASE)
+		show_help(env);
 }

@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fractol.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ramoussa <ramoussa@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/04 05:58:40 by ramoussa          #+#    #+#             */
+/*   Updated: 2023/08/04 06:00:44 by ramoussa         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
-#include <stdlib.h>
-#include <unistd.h>
-#include <stdio.h>
-#include "MLX42/MLX42.h"
+# include <stdlib.h>
+# include <unistd.h>
+# include <stdio.h>
+# include "MLX42/MLX42.h"
 
 enum FractolTypeEnum
 {
