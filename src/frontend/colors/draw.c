@@ -110,14 +110,12 @@ void compute_kochcurve(t_fractol *env, t_complex *a, t_complex *b, int level)
 void draw_kochcurve(t_fractol *env)
 {
 	int	level;
-	int	height;
 	int	width;
 	t_complex	*a;
 	t_complex	*b;
 	t_complex	*c;
 
 	level = 6;
-	height = env->height - 2;
 	width = (int)(env->width / sqrt(2));
 
 	a = (t_complex *)malloc(sizeof(t_complex));
