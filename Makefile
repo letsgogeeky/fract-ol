@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: ramoussa <ramoussa@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/08/05 22:29:23 by ramoussa          #+#    #+#              #
+#    Updated: 2023/08/05 22:29:28 by ramoussa         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME:= fractol
 
 CFLAGS	:= -Wextra -Wall -Werror -g -O3 -funroll-loops
@@ -6,7 +18,6 @@ BASELIB := ./lib/ft-baselib
 
 HEADERS := -I ./include -I $(LIBMLX)/include -I ${BASELIB}/include
 LIBS := $(LIBMLX)/build/libmlx42.a ${BASELIB}/baselib.a
-LDFLAGS := -ldl -L $(LIBMLX)/glfw_lib/ -lglfw3 -pthread -lm -fsanitize=address -flto -framework Cocoa -framework OpenGL -framework IOKit
 BACKEND_SRCS := backend/ft_complex/arithmetic.c backend/fractol.c \
 	backend/environment.c backend/ft_complex/manage.c
 FRONTEND_SRCS := frontend/controls/mouse.c frontend/controls/window.c \
@@ -15,7 +26,7 @@ FRONTEND_SRCS := frontend/controls/mouse.c frontend/controls/window.c \
 	frontend/controls/keyboard/shift_range.c frontend/logger.c
 
 SRCS := init.c main.c
-
+LDFLAGS := -ldl -L $(LIBMLX)/glfw_lib/ -lglfw3 -pthread -lm -fsanitize=address -flto -framework Cocoa -framework OpenGL -framework IOKit
 OBJS := ${addprefix src/, ${BACKEND_SRCS:.c=.o} ${FRONTEND_SRCS:.c=.o} ${SRCS:.c=.o}}
 
 all: MLX BASELIB ${NAME}

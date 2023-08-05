@@ -6,7 +6,7 @@
 /*   By: ramoussa <ramoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 05:55:45 by ramoussa          #+#    #+#             */
-/*   Updated: 2023/08/04 06:00:23 by ramoussa         ###   ########.fr       */
+/*   Updated: 2023/08/05 22:35:01 by ramoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,12 @@ void        complex_multiply(t_complex *complex);
  * number to be added.
  */
 void        complex_add(t_complex *original, const t_complex *c);
+void		complex_pow_3(t_complex *complex);
+void		complex_subtract(t_complex *c1, t_complex *c2);
+t_complex	*complex_subtract_immutable(t_complex *c1, t_complex c2);
 void        set_complex(t_complex *point, double real, double imaginary);
-
+t_complex	*complex_divide(t_complex *numerator, t_complex	*denominator);
+void		complex_multiply_scalar(t_complex *complex, int scalar);
 t_complex   *complex_copy(t_complex *original);
 void        print_complex(t_complex *complex);
 void        update_pixel_size(t_fractol *env);

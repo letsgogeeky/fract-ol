@@ -45,12 +45,17 @@ static void set_env_fractol_mode(t_fractol *env, int argc, char **argv)
 			env->f_type = KOCH;
 			env->name = "KOCH SNOWFLAKE Fractol";
 		}
+		else if (is_equal_str(argv[1], "newton"))
+		{
+			env->f_type = NEWTON;
+			env->name = "NEWTON Fractal";
+		}
 	}
 }
 
 void        set_env_boundaries(t_fractol *env)
 {
-    if (env->f_type == MANDELBROT)
+    if (env->f_type == MANDELBROT || env->f_type == NEWTON)
     {
         env->real_min = -2.5;
         env->real_max = 2.5;
@@ -94,7 +99,7 @@ t_fractol   *init_env(int argc, char **argv)
 	
 	set_env_fractol_mode(env, argc, argv);
     set_env_boundaries(env);
-	env->estimator_max = 25;
+	env->estimator_max = 100;
 	env->width = 1366;
 	env->height = 768;
     env->radius = 30;
