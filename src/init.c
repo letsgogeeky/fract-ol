@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ramoussa <ramoussa@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/05 23:28:58 by ramoussa          #+#    #+#             */
+/*   Updated: 2023/08/05 23:30:45 by ramoussa         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "backend.h"
 #include "frontend.h"
 
@@ -69,7 +81,6 @@ void        set_env_boundaries(t_fractol *env)
         env->imaginary_max = 1.3;
         env->imaginary_min = -1.5;
     }
-	// printf("REAL MAX AT INIT: %f\n", env->real_max);
 }
 
 void    set_zoom(t_fractol *env)
