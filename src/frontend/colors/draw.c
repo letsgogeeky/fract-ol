@@ -6,7 +6,7 @@
 /*   By: ramoussa <ramoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 22:45:46 by ramoussa          #+#    #+#             */
-/*   Updated: 2023/08/05 23:19:20 by ramoussa         ###   ########.fr       */
+/*   Updated: 2023/08/05 23:58:35 by ramoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -262,6 +262,52 @@ void	draw_border(t_fractol *env)
 		y++;
 	}
 }
+int		compute_burningship_pixel(t_fractol *env, t_complex *z, uint32_t x, uint32_t y)
+{
+	int	n;
+	int	xtmp;
+	z->real = env->real_min + (x * env->pixel_size);
+    z->imag = env->imaginary_max - (y * env->pixel_size);
+    n = 0;
+    while (n < env->estimator_max)
+    {
+        if ((z->real * z->real) + (z->imag * z->imag) > 4.0)
+            break ;
+		xtmp = (z->real * z->real) - (z->imag * z->imag) + z->real;
+		z->imag = fabs(2.0 * z->real * z->imag) + z->imag;
+		z->real = xtmp;
+        n++;
+    }
+
+	return (n);
+}
+
+void	draw_burningship(t_fractol *env)
+{
+	int x;
+	int y;
+	t_complex *z;
+	int n;
+
+	z = (t_complex *)malloc(sizeof(t_complex*));
+	x = 0;
+	y = 0;
+	while (y < env->height)
+	{
+		while (x < env->width)
+		{
+			n = compute_burningship_pixel(env, z, x, y);
+			if (n == env->estimator_max)
+				mlx_put_pixel(env->current_frame, x, y, 0x000000FF);
+			else
+				mlx_put_pixel(env->current_frame, x, y, 0xFF0000FF);
+			x++;
+		}
+		x = 0;
+		y++;
+	}
+	free(z);
+}
 
 void compute_frame(t_fractol *env)
 {
@@ -275,5 +321,7 @@ void compute_frame(t_fractol *env)
 		draw_kochcurve(env);
 	else if (env->f_type == NEWTON)
 		draw_newton(env);
+	else if (env->f_type == BURNINGSHIP)
+		draw_burningship(env);
 	env->should_draw = false;
 }

@@ -6,7 +6,7 @@
 /*   By: ramoussa <ramoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 05:58:40 by ramoussa          #+#    #+#             */
-/*   Updated: 2023/08/05 22:41:45 by ramoussa         ###   ########.fr       */
+/*   Updated: 2023/08/05 23:48:13 by ramoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ enum FractolTypeEnum
     MANDELBROT,
     JULIA,
 	KOCH,
-	NEWTON
+	NEWTON,
+	BURNINGSHIP
 };
 
 typedef struct s_zoom

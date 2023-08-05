@@ -6,7 +6,7 @@
 /*   By: ramoussa <ramoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 23:28:58 by ramoussa          #+#    #+#             */
-/*   Updated: 2023/08/05 23:30:45 by ramoussa         ###   ########.fr       */
+/*   Updated: 2023/08/05 23:49:19 by ramoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,17 @@ static void set_env_fractol_mode(t_fractol *env, int argc, char **argv)
 			env->f_type = NEWTON;
 			env->name = "NEWTON Fractal";
 		}
+		else if (is_equal_str(argv[1], "ship"))
+		{
+			env->f_type = BURNINGSHIP;
+			env->name = "BURNING SHIP Fractal";
+		}
 	}
 }
 
 void        set_env_boundaries(t_fractol *env)
 {
-    if (env->f_type == MANDELBROT || env->f_type == NEWTON)
+    if (env->f_type == MANDELBROT || env->f_type == NEWTON || env->f_type == BURNINGSHIP)
     {
         env->real_min = -2.5;
         env->real_max = 2.5;
