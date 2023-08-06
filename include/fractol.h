@@ -6,7 +6,7 @@
 /*   By: ramymoussa <ramymoussa@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 05:58:40 by ramoussa          #+#    #+#             */
-/*   Updated: 2023/08/06 17:23:59 by ramymoussa       ###   ########.fr       */
+/*   Updated: 2023/08/06 23:27:14 by ramymoussa       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 # include <stdio.h>
 # include "MLX42/MLX42.h"
 
+#define BLACK 0x000000FF
+#define BORDER_COLOR 0xFFFFFFFF
 enum FractolTypeEnum
 {
     MANDELBROT,

@@ -6,7 +6,7 @@
 #    By: ramymoussa <ramymoussa@student.42.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/05 22:29:23 by ramoussa          #+#    #+#              #
-#    Updated: 2023/08/06 22:50:49 by ramymoussa       ###   ########.fr        #
+#    Updated: 2023/08/06 23:25:25 by ramymoussa       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ BASELIB := ./lib/ft-baselib
 HEADERS := -I ./include -I $(LIBMLX)/include -I ${BASELIB}/include
 LIBS := $(LIBMLX)/build/libmlx42.a ${BASELIB}/baselib.a
 BACKEND_SRCS := backend/ft_complex/arithmetic.c backend/fractol.c \
-	backend/environment.c backend/ft_complex/manage.c
+	backend/environment.c backend/ft_complex/manage.c backend/border.c
 FRONTEND_SRCS := frontend/controls/mouse.c frontend/controls/window.c \
 	frontend/colors/draw.c frontend/colors/encoders.c frontend/controls/keyboard/factory.c \
 	frontend/controls/keyboard/shift_color.c frontend/controls/keyboard/shift_details.c \

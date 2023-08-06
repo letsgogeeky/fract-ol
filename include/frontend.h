@@ -6,7 +6,7 @@
 /*   By: ramymoussa <ramymoussa@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 05:56:52 by ramoussa          #+#    #+#             */
-/*   Updated: 2023/08/06 22:53:14 by ramymoussa       ###   ########.fr       */
+/*   Updated: 2023/08/06 23:24:29 by ramymoussa       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,7 @@ void	show_help(t_fractol *env);
 
 //////////////// Fractal Pixel Iterators ///////////
 void    draw_multibrot(t_fractol *env);
+void    draw_julia(t_fractol *env);
+void    draw_mandelbrot(t_fractol *env);
+
 #endif

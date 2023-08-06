@@ -6,7 +6,7 @@
 /*   By: ramymoussa <ramymoussa@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 23:28:58 by ramoussa          #+#    #+#             */
-/*   Updated: 2023/08/06 20:37:56 by ramymoussa       ###   ########.fr       */
+/*   Updated: 2023/08/06 23:04:49 by ramymoussa       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,12 +90,10 @@ static void set_env_fractol_mode(t_fractol *env, int argc, char **argv)
 
 void        set_env_boundaries(t_fractol *env)
 {
-    
-        env->real_min = -2.5;
-        env->real_max = 2.5;
-        env->imaginary_max = 1.5;
-        env->imaginary_min = -1.5;
-    
+	env->real_min = -2.5;
+	env->real_max = 2.5;
+	env->imaginary_max = 1.5;
+	env->imaginary_min = -1.5;
 }
 
 void    set_zoom(t_fractol *env)
@@ -122,13 +120,12 @@ t_fractol   *init_env(int argc, char **argv)
 	int			i;
 
     env = (t_fractol *)malloc(sizeof(t_fractol));
-	
 	set_env_fractol_mode(env, argc, argv);
     set_env_boundaries(env);
 	env->estimator_max = 300;
 	env->width = 1400;
 	env->height = 800;
-    env->radius = 30;
+    env->radius = 3;
 	env->shift_val = 0.04;
 	env->border = (int **)malloc(env->height * sizeof(int*));
 	i = 0;

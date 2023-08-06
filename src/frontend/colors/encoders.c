@@ -9,7 +9,7 @@ void smash_pixel(int x, int y, int32_t estimator, t_fractol *env)
 {
 	int color;
 
-	color = 0x000000FF;
+	color = BLACK;
 	if (estimator != env->estimator_max)
 	{
 		color = get_rgba((estimator * 7) % env->color_scale->red, \

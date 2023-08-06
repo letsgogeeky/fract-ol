@@ -6,67 +6,11 @@
 /*   By: ramymoussa <ramymoussa@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 22:45:46 by ramoussa          #+#    #+#             */
-/*   Updated: 2023/08/06 22:52:52 by ramymoussa       ###   ########.fr       */
+/*   Updated: 2023/08/06 23:29:45 by ramymoussa       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "frontend.h"
-
-void draw_julia(t_fractol *env)
-{
-	int x;
-	int y;
-	t_complex *z;
-	int n;
-	t_complex *c;
-
-	z = (t_complex *)malloc(sizeof(t_complex*));
-	c = (t_complex *)malloc(sizeof(t_complex*));
-	x = 0;
-	y = 0;
-	set_complex(c, -0.5251993, -0.5251993);
-	while (y < env->height)
-	{
-		while (x < env->width)
-		{
-			n = compute_julia_pixel(env, z, c, x, y);
-			smash_pixel(x, y, n, env);
-			x++;
-		}
-		x = 0;
-		y++;
-	}
-	free(z);
-	free(c);
-}
-
-void draw_mandelbrot(t_fractol *env)
-{
-	int x;
-	int y;
-	t_complex *z;
-	int n;
-	t_complex *c;
-
-	z = (t_complex *)malloc(sizeof(t_complex*));
-	c = (t_complex *)malloc(sizeof(t_complex*));
-	x = 0;
-	y = 0;
-	while (y < env->height)
-	{
-		while (x < env->width)
-		{
-			n = compute_mandelbrot_pixel(env, z, c, x, y);
-			smash_pixel(x, y, n, env);
-			x++;
-		}
-		x = 0;
-		y++;
-	}
-	free(z);
-	free(c);
-}
-
 
 int	compute_newton_pixel(t_fractol *env, t_complex *z, t_complex *c, uint32_t x, uint32_t y)
 {
@@ -227,23 +171,14 @@ void	draw_border(t_fractol *env)
 
 	x = 0;
 	y = 0;
+	set_border_matrix(env);
 	while (y < env->height)
 	{
 		while (x < env->width)
 		{
-			if (env->border[y][x] == 0x000000FF)
+			if (env->border[y][x] == 1)
 			{
-				if (x - 1 > 0 && x + 1 < env->width && y - 1 > 0 && y + 1 < env->height )
-				{
-					if (env->border[y][x + 1] != 0x000000FF)
-						mlx_put_pixel(env->current_frame, x + 1, y, 0xFFFFFFFF);
-					else if (env->border[y][x - 1] != 0x000000FF)
-						mlx_put_pixel(env->current_frame, x - 1, y, 0xFFFFFFFF);
-					else if (env->border[y + 1][x] != 0x000000FF)
-						mlx_put_pixel(env->current_frame, x, y + 1, 0xFFFFFFFF);
-					else if (env->border[y - 1][x] != 0x000000FF)
-						mlx_put_pixel(env->current_frame, x, y - 1, 0xFFFFFFFF);
-				}
+				mlx_put_pixel(env->current_frame, x, y, BORDER_COLOR);
 			}
 			x++;
 		}
@@ -251,6 +186,7 @@ void	draw_border(t_fractol *env)
 		y++;
 	}
 }
+
 int		compute_burningship_pixel(t_fractol *env, t_complex *z, uint32_t x, uint32_t y)
 {
 	int	n;
