@@ -3,33 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ramoussa <ramoussa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ramymoussa <ramymoussa@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 22:45:46 by ramoussa          #+#    #+#             */
-/*   Updated: 2023/08/05 23:58:35 by ramoussa         ###   ########.fr       */
+/*   Updated: 2023/08/06 22:52:52 by ramymoussa       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "frontend.h"
-
-void smash_pixel(int x, int y, int32_t estimator, t_fractol *env)
-{
-	int color;
-
-	color = 0x000000FF;
-	if (estimator != env->estimator_max)
-	{
-		color = get_rgba((estimator * env->color_scale->red / env->estimator_max), \
-			(estimator * env->color_scale->green / env->estimator_max), \
-			(estimator * env->color_scale->blue / env->estimator_max),\
-			(estimator * env->color_scale->transparency / env->estimator_max));
-		estimator = estimator * 100;
-		color *= estimator;
-	}
-	env->border[y][x] = color;
-	mlx_put_pixel(env->current_frame, x, y, color);
-}
-
 
 void draw_julia(t_fractol *env)
 {
@@ -86,59 +67,67 @@ void draw_mandelbrot(t_fractol *env)
 	free(c);
 }
 
+
 int	compute_newton_pixel(t_fractol *env, t_complex *z, t_complex *c, uint32_t x, uint32_t y)
 {
 	int	n;
-	int	r_idx;
+	// int	r_idx;
 	t_complex *zcpy1;
 	t_complex *zcpy2;
-	t_complex	*difference;
-	t_complex	roots[3] = 
-	{
-		{1, 0},
-		{-0.5, sqrt(3)/ 2},
-		{-0.5, -sqrt(3)/2}	
-	};
-	int		colors[3] =
-	{
-		0xFF0000FF,
-		0x00FF00FF,
-		0x0000FFFF
-	};
+	// t_complex	*difference;
+	// t_complex	roots[3] = 
+	// {
+	// 	{1, 0},
+	// 	{-0.5, sqrt(3)/ 2.0},
+	// 	{-0.5, -sqrt(3)/2.0}	
+	// };
+	// int		colors[3] =
+	// {
+	// 	0xFF0000FF,
+	// 	0x00FF00FF,
+	// 	0x0000FFFF
+	// };
 
 	n = 0;
 	z->real = env->real_min + (x * env->pixel_size);
     z->imag = env->imaginary_max - (y * env->pixel_size);
+	// z->real = (x - env->width / 2.0) / (env->width / 4.0);
+    // z->imag = (y - env->height / 2.0) / (env->height / 4.0);
 	c->real = 1;
 	c->imag = 0;
-	double tolerance = 0.001;
+	double tolerance = 0.000001;
 	while (n < env->estimator_max)
     {
         zcpy1 = complex_copy(z);
 		zcpy2 = complex_copy(z);
 		complex_pow_3(zcpy1);
 		complex_subtract(zcpy1, c);
+		if (fabs(z->real) < tolerance && fabs(z->imag) < tolerance)
+		{
+			break ;
+		}
 		complex_multiply(zcpy2);
 		complex_multiply_scalar(zcpy2, 3);
 		zcpy1 = complex_divide(zcpy1, zcpy2);
 		complex_subtract(z, zcpy1);
 		// zcp1 = complex_divide()
-		r_idx = 0;
-		while (r_idx < 3)
-		{
-			difference = complex_subtract_immutable(z, roots[r_idx]);
-			ft_printf("diff real: %f  diff imag: %f\n", difference->real, difference->imag);
-			fflush(stdout);
-			return 0;
-			if (fabs(difference->real) < tolerance && fabs(difference->imag) < tolerance)
-			{
-				return (colors[r_idx]);
-			}
-			r_idx++;
-		}
+		
+		// r_idx = 0;
+		// while (r_idx < 3)
+		// {
+		// 	difference = complex_subtract_immutable(z, roots[r_idx]);
+		// 	// ft_printf("diff real: %f  diff imag: %f\n", difference->real, difference->imag);
+		// 	// fflush(stdout);
+		// 	// return 0;
+		// 	if (fabs(difference->real) < tolerance && fabs(difference->imag) < tolerance)
+		// 	{
+		// 		return (colors[r_idx]);
+		// 	}
+		// 	r_idx++;
+		// }
         n++;
     }
-	return (0x000000FF);
+	return (n);
 }
 
 void draw_newton(t_fractol *env)
@@ -158,8 +147,8 @@ void draw_newton(t_fractol *env)
 		while (x < env->width)
 		{
 			n = compute_newton_pixel(env, z, c, x, y);
-			mlx_put_pixel(env->current_frame, x, y, n);
-			// smash_pixel(x, y, n, env);
+			// mlx_put_pixel(env->current_frame, x, y, n);
+			smash_pixel(x, y, n, env);
 			x++;
 		}
 		x = 0;
@@ -323,5 +312,7 @@ void compute_frame(t_fractol *env)
 		draw_newton(env);
 	else if (env->f_type == BURNINGSHIP)
 		draw_burningship(env);
+	else if (env->f_type == MULTIBROT)
+		draw_multibrot(env);
 	env->should_draw = false;
 }

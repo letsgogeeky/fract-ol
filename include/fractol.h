@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ramoussa <ramoussa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ramymoussa <ramymoussa@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 05:58:40 by ramoussa          #+#    #+#             */
-/*   Updated: 2023/08/05 23:48:13 by ramoussa         ###   ########.fr       */
+/*   Updated: 2023/08/06 17:23:59 by ramymoussa       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ enum FractolTypeEnum
     JULIA,
 	KOCH,
 	NEWTON,
-	BURNINGSHIP
+	BURNINGSHIP,
+    MULTIBROT
 };
 
 typedef struct s_zoom

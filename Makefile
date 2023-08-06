@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ramoussa <ramoussa@student.42.fr>          +#+  +:+       +#+         #
+#    By: ramymoussa <ramymoussa@student.42.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/05 22:29:23 by ramoussa          #+#    #+#              #
-#    Updated: 2023/08/05 22:29:28 by ramoussa         ###   ########.fr        #
+#    Updated: 2023/08/06 22:50:49 by ramymoussa       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,8 @@ BACKEND_SRCS := backend/ft_complex/arithmetic.c backend/fractol.c \
 FRONTEND_SRCS := frontend/controls/mouse.c frontend/controls/window.c \
 	frontend/colors/draw.c frontend/colors/encoders.c frontend/controls/keyboard/factory.c \
 	frontend/controls/keyboard/shift_color.c frontend/controls/keyboard/shift_details.c \
-	frontend/controls/keyboard/shift_range.c frontend/logger.c
+	frontend/controls/keyboard/shift_range.c frontend/logger.c \
+	frontend/fractal_pixels.c
 
 SRCS := init.c main.c
 LDFLAGS := -ldl -L $(LIBMLX)/glfw_lib/ -lglfw3 -pthread -lm -fsanitize=address -flto -framework Cocoa -framework OpenGL -framework IOKit
