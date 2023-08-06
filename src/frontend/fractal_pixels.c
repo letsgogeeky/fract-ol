@@ -16,7 +16,7 @@ void draw_multibrot(t_fractol *env)
 	{
 		while (x < env->width)
 		{
-			n = compute_multibrot_pixel(env, z, c, x, y, 10);
+			n = compute_multibrot_pixel(env, z, c, x, y);
 			smash_pixel(x, y, n, env);
 			x++;
 		}

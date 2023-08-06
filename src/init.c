@@ -6,7 +6,7 @@
 /*   By: ramymoussa <ramymoussa@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 23:28:58 by ramoussa          #+#    #+#             */
-/*   Updated: 2023/08/06 23:04:49 by ramymoussa       ###   ########.fr       */
+/*   Updated: 2023/08/06 23:46:15 by ramymoussa       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	show_program_options()
 	ft_printf("1. `mandelbrot`\n");
 	ft_printf("2. `julia`\n");
 	ft_printf("3. `kock` is shortcut for Koch Snowflake\n");
-	ft_printf("4. `multi` is shortcut for Multibrot\n");
+	ft_printf("4. `multibrot <POWER (default = 3)>` a dynamic fractal of mandelbrot family\n");
 }
 
 static void set_env_fractol_mode(t_fractol *env, int argc, char **argv)
@@ -73,10 +73,17 @@ static void set_env_fractol_mode(t_fractol *env, int argc, char **argv)
 			env->f_type = BURNINGSHIP;
 			env->name = "BURNING SHIP Fractal";
 		}
-		else if (is_equal_str(argv[1], "multi"))
+		else if (is_equal_str(argv[1], "multibrot"))
 		{
 			env->f_type = MULTIBROT;
 			env->name = "MULTIBROT Fractal";
+			if (argc > 2)
+				env->multibrot_n = ft_atoi(argv[2]);
+			else
+			{
+				env->multibrot_n = 3;
+				ft_printf("Multibrot power param was not passed, set to 3 by default\n");
+			}
 		}
 		else
 		{

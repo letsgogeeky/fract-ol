@@ -6,7 +6,7 @@
 /*   By: ramymoussa <ramymoussa@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 05:55:45 by ramoussa          #+#    #+#             */
-/*   Updated: 2023/08/06 23:28:12 by ramymoussa       ###   ########.fr       */
+/*   Updated: 2023/08/06 23:45:26 by ramymoussa       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,8 +147,7 @@ int         compute_julia_pixel(t_fractol *env, t_complex *z, \
                                 t_complex *c, uint32_t x, uint32_t y);
 
 int         compute_multibrot_pixel(t_fractol *env, t_complex *z, \
-                                    t_complex *c, uint32_t x, \
-                                    uint32_t y, int power);
+                                    t_complex *c, uint32_t x, uint32_t y);
 
 void	set_border_matrix(t_fractol *env);
 void    print_boundaries(t_fractol *env);

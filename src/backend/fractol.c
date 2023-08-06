@@ -6,7 +6,7 @@
 /*   By: ramymoussa <ramymoussa@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 16:26:41 by ramoussa          #+#    #+#             */
-/*   Updated: 2023/08/06 22:40:49 by ramymoussa       ###   ########.fr       */
+/*   Updated: 2023/08/06 23:43:57 by ramymoussa       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int compute_julia_pixel(t_fractol *env, t_complex *z, t_complex *c, uint32_t x, 
 }
 
 int compute_multibrot_pixel(t_fractol *env, t_complex *z, t_complex *c, \
-							uint32_t x, uint32_t y, int power)
+							uint32_t x, uint32_t y)
 {
     int n;
 	int p;
@@ -65,7 +65,7 @@ int compute_multibrot_pixel(t_fractol *env, t_complex *z, t_complex *c, \
 		t_complex z_powered;
 		z_powered.real = z->real;
 		z_powered.imag = z->imag;
-		while (p < power)
+		while (p < env->multibrot_n)
 		{
 			z_powered = complex_multiply_immutable(z_powered, *z);
 			p++;

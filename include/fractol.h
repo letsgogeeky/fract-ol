@@ -6,7 +6,7 @@
 /*   By: ramymoussa <ramymoussa@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 05:58:40 by ramoussa          #+#    #+#             */
-/*   Updated: 2023/08/06 23:27:14 by ramymoussa       ###   ########.fr       */
+/*   Updated: 2023/08/06 23:39:46 by ramymoussa       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ typedef struct s_fractol
     int                     width;
     int                     height;
     double                  radius;
+    int                     multibrot_n;
     double                  pixel_size;
     float                   shift_val;
     t_zoom                  *zoom;
