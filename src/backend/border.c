@@ -2,7 +2,7 @@
 
 void    set_if_border(t_fractol *env, int x, int y)
 {
-    if (x - 1 < 0 || x + 1 > env->width || y - 1 < 0 || y + 1 > env->height)
+    if (x - 1 < 0 || x + 1 >= env->width || y - 1 < 0 || y + 1 >= env->height)
         return ;
     if (env->border[y][x + 1] != 0x000000FF)
         env->border[y][x + 1] = 1;
