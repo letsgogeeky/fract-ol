@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ramoussa <ramoussa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ramymoussa <ramymoussa@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 16:26:41 by ramoussa          #+#    #+#             */
-/*   Updated: 2023/08/05 20:34:17 by ramoussa         ###   ########.fr       */
+/*   Updated: 2023/08/06 20:24:55 by ramymoussa       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int compute_mandelbrot_pixel(t_fractol *env, t_complex *z, t_complex *c, uint32_
     n = 0;
     while (n < env->estimator_max)
     {
-        if (sqrt((z->real * z->real) + (z->imag * z->imag)) > 2)
+        if ((z->real * z->real) + (z->imag * z->imag) >= 4)
             break ;
         complex_multiply(z);
         complex_add(z, c);
