@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   backend.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ramoussa <ramoussa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ramymoussa <ramymoussa@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 05:55:45 by ramoussa          #+#    #+#             */
-/*   Updated: 2023/08/05 22:35:01 by ramoussa         ###   ########.fr       */
+/*   Updated: 2023/08/06 21:18:41 by ramymoussa       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,18 @@ typedef struct s_complex
 void        complex_multiply(t_complex *complex);
 
 /**
+ * Multiplies two complex numbers immutably.
+ *
+ * This function takes two complex numbers `a` and `b`, and returns a new complex
+ * number that is the result of multiplying them together.
+ *
+ * @param a The first complex number.
+ * @param b The second complex number.
+ * @return A new complex number representing the product of `a` and `b`.
+ */
+t_complex   complex_multiply_immutable(t_complex a, t_complex b);
+
+/**
  * Performs complex number addition.
  *
  * This function takes a pointer to a t_complex structure representing a complex
@@ -64,6 +76,18 @@ void        complex_multiply(t_complex *complex);
  * number to be added.
  */
 void        complex_add(t_complex *original, const t_complex *c);
+
+/**
+ * Adds two complex numbers immutably.
+ *
+ * This function takes two complex numbers `original` and `c`, and returns a new
+ * complex number that is the result of adding them together.
+ *
+ * @param original The original complex number.
+ * @param c The complex number to be added.
+ * @return A new complex number representing the sum of `original` and `c`.
+ */
+t_complex	complex_add_immutable(t_complex original, t_complex c);
 void		complex_pow_3(t_complex *complex);
 void		complex_subtract(t_complex *c1, t_complex *c2);
 t_complex	*complex_subtract_immutable(t_complex *c1, t_complex c2);
