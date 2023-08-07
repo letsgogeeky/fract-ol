@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   backend.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ramoussa <ramoussa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ramymoussa <ramymoussa@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 05:55:45 by ramoussa          #+#    #+#             */
-/*   Updated: 2023/08/04 06:00:23 by ramoussa         ###   ########.fr       */
+/*   Updated: 2023/08/08 00:17:18 by ramymoussa       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,6 @@
 # include <stdio.h>
 # include "fractol.h"
 # include "baselib.h"
-
-typedef struct s_complex
-{
-    double real;
-    double imag;
-}   t_complex;
 
 /**
  * Performs complex number multiplication.
@@ -42,6 +36,18 @@ typedef struct s_complex
  * number to be multiplied.
  */
 void        complex_multiply(t_complex *complex);
+
+/**
+ * Multiplies two complex numbers immutably.
+ *
+ * This function takes two complex numbers `a` and `b`, and returns a new complex
+ * number that is the result of multiplying them together.
+ *
+ * @param a The first complex number.
+ * @param b The second complex number.
+ * @return A new complex number representing the product of `a` and `b`.
+ */
+t_complex   complex_multiply_immutable(t_complex a, t_complex b);
 
 /**
  * Performs complex number addition.
@@ -64,8 +70,24 @@ void        complex_multiply(t_complex *complex);
  * number to be added.
  */
 void        complex_add(t_complex *original, const t_complex *c);
-void        set_complex(t_complex *point, double real, double imaginary);
 
+/**
+ * Adds two complex numbers immutably.
+ *
+ * This function takes two complex numbers `original` and `c`, and returns a new
+ * complex number that is the result of adding them together.
+ *
+ * @param original The original complex number.
+ * @param c The complex number to be added.
+ * @return A new complex number representing the sum of `original` and `c`.
+ */
+t_complex	complex_add_immutable(t_complex original, t_complex c);
+void		complex_pow_3(t_complex *complex);
+void		complex_subtract(t_complex *c1, t_complex *c2);
+t_complex	*complex_subtract_immutable(t_complex *c1, t_complex c2);
+void        set_complex(t_complex *point, double real, double imaginary);
+t_complex	*complex_divide(t_complex *numerator, t_complex	*denominator);
+void		complex_multiply_scalar(t_complex *complex, int scalar);
 t_complex   *complex_copy(t_complex *original);
 void        print_complex(t_complex *complex);
 void        update_pixel_size(t_fractol *env);
@@ -116,8 +138,12 @@ int         compute_mandelbrot_pixel(t_fractol *env, t_complex *z, \
  * the Julia set.
  */
 int         compute_julia_pixel(t_fractol *env, t_complex *z, \
-                                t_complex *c, uint32_t x, uint32_t y);
+                                uint32_t x, uint32_t y);
 
+int         compute_multibrot_pixel(t_fractol *env, t_complex *z, \
+                                    t_complex *c, uint32_t x, uint32_t y);
+
+void	set_border_matrix(t_fractol *env);
 void    print_boundaries(t_fractol *env);
 void    terminate_app(t_fractol *env);
 #endif
