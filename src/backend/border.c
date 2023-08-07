@@ -1,0 +1,36 @@
+#include "backend.h"
+
+void    set_if_border(t_fractol *env, int x, int y)
+{
+    if (x - 1 < 0 || x + 1 >= env->width || y - 1 < 0 || y + 1 >= env->height)
+        return ;
+    if (env->border[y][x + 1] != 0x000000FF)
+        env->border[y][x + 1] = 1;
+    else if (env->border[y][x - 1] != 0x000000FF)
+        env->border[y][x - 1] = 1;
+    else if (env->border[y + 1][x] != 0x000000FF)
+        env->border[y + 1][x] = 1;
+    else if (env->border[y - 1][x] != 0x000000FF)
+        env->border[y - 1][x] = 1;
+}
+void	set_border_matrix(t_fractol *env)
+{
+	int	x;
+	int	y;
+
+	x = 0;
+	y = 0;
+	while (y < env->height)
+	{
+		while (x < env->width)
+		{
+			if (env->border[y][x] == BLACK)
+			{
+				set_if_border(env, x, y);
+			}
+			x++;
+		}
+		x = 0;
+		y++;
+	}
+}

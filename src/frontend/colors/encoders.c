@@ -1,26 +1,22 @@
-#include "fractol.h"
+#include "frontend.h"
 
 int get_rgba(int red, int green, int blue, int alpha)
 {
     return (red << 24 | green << 16 | blue << 8 | alpha);
 }
 
-int get_red(int rgba)
+void smash_pixel(int x, int y, int32_t estimator, t_fractol *env)
 {
-    return ((rgba >> 24) & 0xFF);
-}
+	int color;
 
-int get_green(int rgba)
-{
-    return ((rgba >> 16) & 0xFF);
-}
-
-int get_blue(int rgba)
-{
-    return ((rgba >> 8) & 0xFF);
-}
-
-int get_alpha(int rgba)
-{
-    return (rgba & 0xFF);
+	color = BLACK;
+	if (estimator != env->estimator_max)
+	{
+		color = get_rgba((estimator * 7) % env->color_scale->red, \
+			((estimator * 13) % env->color_scale->green), \
+			(estimator * 31) % env->color_scale->blue,\
+			env->color_scale->transparency);
+	}
+	env->border[y][x] = color;
+	mlx_put_pixel(env->current_frame, x, y, color);
 }
