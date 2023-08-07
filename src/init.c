@@ -6,7 +6,7 @@
 /*   By: ramymoussa <ramymoussa@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 23:28:58 by ramoussa          #+#    #+#             */
-/*   Updated: 2023/08/08 00:38:51 by ramymoussa       ###   ########.fr       */
+/*   Updated: 2023/08/08 00:47:14 by ramymoussa       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ static void set_env_fractol_mode(t_fractol *env, int argc, char **argv)
 			}
 			else
 			{
-				env->julia_c.real = 0.6101;
-				env->julia_c.imag = -0.99101;
+				env->julia_c.real = 0;
+				env->julia_c.imag = 0.8;
 				ft_printf("You did not specify C for Julia, setting default values...\n");
 			}
 		}
