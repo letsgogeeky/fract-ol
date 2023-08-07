@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ramoussa <ramoussa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ramymoussa <ramymoussa@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 05:58:40 by ramoussa          #+#    #+#             */
-/*   Updated: 2023/08/04 06:00:44 by ramoussa         ###   ########.fr       */
+/*   Updated: 2023/08/08 00:17:15 by ramymoussa       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,24 @@
 # include <stdio.h>
 # include "MLX42/MLX42.h"
 
+#define BLACK 0x000000FF
+#define BORDER_COLOR 0xFFFFFFFF
+
 enum FractolTypeEnum
 {
     MANDELBROT,
     JULIA,
-	KOCH
+	KOCH,
+	NEWTON,
+	BURNINGSHIP,
+    MULTIBROT
 };
+
+typedef struct s_complex
+{
+    double real;
+    double imag;
+}   t_complex;
 
 typedef struct s_zoom
 {
@@ -42,10 +54,13 @@ typedef struct s_color
     int transparency;
 }   t_color;
 
+
 typedef struct s_fractol
 {
     enum FractolTypeEnum    f_type;
     char                    *name;
+    t_complex               min;
+    t_complex               max;
     double                  real_min;
     double                  real_max;
     double                  imaginary_min;
@@ -53,7 +68,9 @@ typedef struct s_fractol
     int                     estimator_max;
     int                     width;
     int                     height;
+    t_complex               julia_c;
     double                  radius;
+    int                     multibrot_n;
     double                  pixel_size;
     float                   shift_val;
     t_zoom                  *zoom;

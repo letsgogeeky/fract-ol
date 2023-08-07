@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   window.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ramoussa <ramoussa@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/05 23:30:07 by ramoussa          #+#    #+#             */
+/*   Updated: 2023/08/05 23:30:15 by ramoussa         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "frontend.h"
 #include "fractol.h"
 
@@ -7,7 +19,6 @@ void ft_window_resize_hook(int32_t width, int32_t height, void * param)
     t_fractol *env;
     env = (t_fractol *)param;
 
-    printf("%s\n", env->name);
     env->width = width;
     env->height = height;
 	mlx_delete_image(env->mlx, env->current_frame);
