@@ -6,7 +6,7 @@
 /*   By: ramymoussa <ramymoussa@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 23:28:58 by ramoussa          #+#    #+#             */
-/*   Updated: 2023/08/06 23:46:15 by ramymoussa       ###   ########.fr       */
+/*   Updated: 2023/08/08 00:38:51 by ramymoussa       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,17 @@ static void set_env_fractol_mode(t_fractol *env, int argc, char **argv)
 		{
 			env->f_type = JULIA;
 			env->name = "Julia Fractol";
+			if (argc >= 4)
+			{
+				env->julia_c.real = get_double(argv[2]);
+				env->julia_c.imag = get_double(argv[3]);
+			}
+			else
+			{
+				env->julia_c.real = 0.6101;
+				env->julia_c.imag = -0.99101;
+				ft_printf("You did not specify C for Julia, setting default values...\n");
+			}
 		}
 		else if (is_equal_str(argv[1], "koch"))
 		{
@@ -129,7 +140,7 @@ t_fractol   *init_env(int argc, char **argv)
     env = (t_fractol *)malloc(sizeof(t_fractol));
 	set_env_fractol_mode(env, argc, argv);
     set_env_boundaries(env);
-	env->estimator_max = 300;
+	env->estimator_max = 100;
 	env->width = 1400;
 	env->height = 800;
     env->radius = 3;
