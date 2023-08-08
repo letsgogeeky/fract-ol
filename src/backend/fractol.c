@@ -6,7 +6,7 @@
 /*   By: ramoussa <ramoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 16:26:41 by ramoussa          #+#    #+#             */
-/*   Updated: 2023/08/08 12:47:53 by ramoussa         ###   ########.fr       */
+/*   Updated: 2023/08/08 13:21:54 by ramoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@ int	in_bound(t_complex p, double boundary)
 		return (0);
 	return (1);
 }
-int compute_mandelbrot_pixel(t_fractol *env, t_complex z, t_complex c, uint32_t x, uint32_t y)
+int compute_mandelbrot_pixel(t_fractol *env, t_complex z, uint32_t x, uint32_t y)
 {
+	t_complex c;
     int n;
 
     c.real = env->real_min + (x * env->pixel_size);
@@ -54,9 +55,10 @@ int compute_julia_pixel(t_fractol *env, t_complex z, uint32_t x, uint32_t y)
     return (n);
 }
 
-int compute_multibrot_pixel(t_fractol *env, t_complex z, t_complex c, \
+int compute_multibrot_pixel(t_fractol *env, t_complex z, \
 							uint32_t x, uint32_t y)
 {
+	t_complex c;
     int n;
 	int p;
 

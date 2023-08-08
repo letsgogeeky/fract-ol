@@ -6,7 +6,7 @@
 /*   By: ramoussa <ramoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 11:10:37 by ramoussa          #+#    #+#             */
-/*   Updated: 2023/08/08 12:50:47 by ramoussa         ###   ########.fr       */
+/*   Updated: 2023/08/08 13:34:59 by ramoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void draw_multibrot(t_fractol *env)
 	{
 		while (x < env->width)
 		{
-			n = compute_multibrot_pixel(env, z, c, x, y);
+			n = compute_multibrot_pixel(env, z, x, y);
 			smash_pixel(x, y, n, env);
 			x++;
 		}
@@ -47,7 +47,6 @@ void draw_julia(t_fractol *env)
 	z.imag = 0;
 	x = 0;
 	y = 0;
-	// set_complex(c, -0.5251993, -0.5251993);
 	while (y < env->height)
 	{
 		while (x < env->width)
@@ -77,7 +76,7 @@ void draw_mandelbrot(t_fractol *env)
 	{
 		while (x < env->width)
 		{
-			n = compute_mandelbrot_pixel(env, z, c, x, y);
+			n = compute_mandelbrot_pixel(env, z, x, y);
 			smash_pixel(x, y, n, env);
 			x++;
 		}
