@@ -6,7 +6,7 @@
 /*   By: ramoussa <ramoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 05:55:45 by ramoussa          #+#    #+#             */
-/*   Updated: 2023/08/08 13:23:42 by ramoussa         ###   ########.fr       */
+/*   Updated: 2023/08/08 18:56:44 by ramoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void		complex_add(t_complex *original, const t_complex *c);
 t_complex	complex_add_immutable(t_complex original, t_complex c);
 void		set_complex(t_complex *point, double real, double imaginary);
 t_complex	*complex_copy(t_complex *original);
+void		set_julia_env(t_fractol *env, int argc, char **argv);
+void		set_env_boundaries(t_fractol *env);
 void		update_pixel_size(t_fractol *env);
 int			compute_mandelbrot_pixel(
 				t_fractol *env, t_complex z, \

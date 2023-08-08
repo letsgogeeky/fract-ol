@@ -6,7 +6,7 @@
 /*   By: ramoussa <ramoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 05:56:52 by ramoussa          #+#    #+#             */
-/*   Updated: 2023/08/08 13:35:57 by ramoussa         ###   ########.fr       */
+/*   Updated: 2023/08/08 19:00:43 by ramoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	go_down(t_fractol *env);
 
 void	control_details(mlx_key_data_t key, t_fractol *env);
 void	show_help(t_fractol *env);
+void	show_program_options(void);
 
 //////////////// Fractal Pixel Iterators ///////////
 void	draw_multibrot(t_fractol *env);

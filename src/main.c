@@ -6,45 +6,44 @@
 /*   By: ramoussa <ramoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 23:29:04 by ramoussa          #+#    #+#             */
-/*   Updated: 2023/08/08 12:09:48 by ramoussa         ###   ########.fr       */
+/*   Updated: 2023/08/08 18:37:24 by ramoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "frontend.h"
 
-static void ft_error(void)
+static void	ft_error(void)
 {
 	ft_printf("%s", mlx_strerror(mlx_errno));
 	exit(EXIT_FAILURE);
 }
 
-void register_hooks(mlx_t *mlx, t_fractol *env)
+void	register_hooks(t_fractol *env)
 {
-	mlx_key_hook(mlx, ft_key_hook, env);
-	mlx_scroll_hook(mlx, mouse_scroll_hook, env);
-	mlx_cursor_hook(mlx, mouse_cursor_hook, env);
-	mlx_resize_hook(mlx, ft_window_resize_hook, env);
-	mlx_close_hook(mlx, window_exit_hook, env);
+	mlx_key_hook(env->mlx, ft_key_hook, env);
+	mlx_scroll_hook(env->mlx, mouse_scroll_hook, env);
+	mlx_cursor_hook(env->mlx, mouse_cursor_hook, env);
+	mlx_resize_hook(env->mlx, ft_window_resize_hook, env);
+	mlx_close_hook(env->mlx, window_exit_hook, env);
 }
 
-
-int32_t	main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	t_fractol *env;
-	
+	t_fractol	*env;
+
 	env = init_env(argc, argv);
-	mlx_t* mlx = mlx_init(env->width, env->height, \
-						  "Fractals (Mandelbrot, Julia, & Multibrot)",\
-						  false);
-	if (!mlx)
+	env->mlx = mlx_init(env->width, env->height, \
+				"Fractals (Mandelbrot, Julia, & Multibrot)", \
+				false);
+	if (!env->mlx)
 		ft_error();
-	env->mlx = mlx;
-	mlx_image_t* img = mlx_new_image(mlx, env->width, env->height);
-	if (!img || (mlx_image_to_window(mlx, img, 0, 0) < 0))
+	env->current_frame = mlx_new_image(env->mlx, env->width, env->height);
+	if (!env->current_frame || \
+			(mlx_image_to_window(env->mlx, env->current_frame, 0, 0) < 0))
 		ft_error();
-	env->current_frame = img;
-	mlx_loop_hook(mlx, (t_fractol_loop_func)compute_frame, env);
-	register_hooks(mlx, env);
-	mlx_loop(mlx);
+	show_help(env);
+	mlx_loop_hook(env->mlx, (t_fractol_loop_func)compute_frame, env);
+	register_hooks(env);
+	mlx_loop(env->mlx);
 	return (EXIT_SUCCESS);
 }

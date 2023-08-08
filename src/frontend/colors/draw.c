@@ -6,7 +6,7 @@
 /*   By: ramoussa <ramoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 22:45:46 by ramoussa          #+#    #+#             */
-/*   Updated: 2023/08/08 11:07:37 by ramoussa         ###   ########.fr       */
+/*   Updated: 2023/08/08 17:21:23 by ramoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	draw_border(t_fractol *env)
 	}
 }
 
-void compute_frame(t_fractol *env)
+void	compute_frame(t_fractol *env)
 {
 	if (env->should_draw == false)
 		return ;

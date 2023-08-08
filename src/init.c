@@ -6,65 +6,32 @@
 /*   By: ramoussa <ramoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 23:28:58 by ramoussa          #+#    #+#             */
-/*   Updated: 2023/08/08 13:15:16 by ramoussa         ###   ########.fr       */
+/*   Updated: 2023/08/08 18:59:36 by ramoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "backend.h"
 #include "frontend.h"
 
-int is_equal_str(char *s1, char *s2)
+static void	abort_illegal_args(t_fractol *env)
 {
-	int	i;
-
-	i = 0;
-	if (ft_strlen(s1) != ft_strlen(s2))
-		return (0);
-	if (!s1 && !s2)
-		return (1);
-	while (s1[i] == s2[i] && s1[i] != '\n')
-		i++;
-	if (i < ft_strlen(s1))
-		return (0);
-	return (1);
+	ft_printf("\033[1m\033[31m");
+	ft_printf("UNKNOWN FRACTAL PASSED AS PARAM...!\n");
+	show_program_options();
+	free(env);
+	exit(0);
 }
 
-void	show_program_options()
+static void	set_env_fractol_mode(t_fractol *env, int argc, char **argv)
 {
-	ft_printf("Please specify a Fractal of the following:\n");
-	ft_printf("1. `m` to render Mandelbrot.\n");
-	ft_printf("2. `j <REAL C> <IMAGINARY C>` to render Julia (if left blank, default values is applied.\n");
-	ft_printf("3. `t <POWER (default = 3)>` to render Multibrot: a dynamic fractal of mandelbrot family.\n");
-}
-
-static void set_env_fractol_mode(t_fractol *env, int argc, char **argv)
-{
-    if (argc < 2 || ft_strlen(argv[1]) != 1)
-	{
-		ft_printf("UNKNOWN FRACTAL PASSED AS PARAM...!\n");
-		show_program_options();
-		free(env);
-		exit(0);
-	}
+	if (argc < 2 || ft_strlen(argv[1]) != 1)
+		abort_illegal_args(env);
 	else
 	{
 		if (argv[1][0] == 'm')
 			env->f_type = MANDELBROT;
 		else if (argv[1][0] == 'j')
-		{
-			env->f_type = JULIA;
-			if (argc >= 4)
-			{
-				env->julia_c.real = get_double(argv[2]);
-				env->julia_c.imag = get_double(argv[3]);
-			}
-			else
-			{
-				env->julia_c.real = 0;
-				env->julia_c.imag = 0.8;
-				ft_printf("You did not specify C for Julia, setting default values...\n");
-			}
-		}
+			set_julia_env(env, argc, argv);
 		else if (argv[1][0] == 't')
 		{
 			env->f_type = MULTIBROT;
@@ -73,68 +40,55 @@ static void set_env_fractol_mode(t_fractol *env, int argc, char **argv)
 			else
 			{
 				env->multibrot_n = 3;
-				ft_printf("Multibrot power param was not passed, set to 3 by default\n");
+				ft_printf("Multibrot power param was not passed, \
+					set to 3 by default\n");
 			}
 		}
 		else
-		{
-			ft_printf("UNKNOWN FRACTAL PASSED AS PARAM...!\n");
-			show_program_options();
-			free(env);
-			exit(0);
-		}
+			abort_illegal_args(env);
 	}
 }
 
-void        set_env_boundaries(t_fractol *env)
+void	set_zoom(t_fractol *env)
 {
-	env->real_min = -2.5;
-	env->real_max = 2.5;
-	env->imaginary_max = 1.5;
-	env->imaginary_min = -1.5;
+	env->zoom = (t_zoom *)malloc(sizeof(t_zoom));
+	env->zoom->real_center = 0;
+	env->zoom->imaginary_center = 0;
+	env->zoom->factor = 1;
 }
 
-void    set_zoom(t_fractol *env)
+void	init_color(t_fractol *env)
 {
-    env->zoom = (t_zoom *)malloc(sizeof(t_zoom));
-    env->zoom->real_center = 0;
-    env->zoom->imaginary_center = 0;
-    env->zoom->factor = 1;
+	env->color_scale = (t_color *)malloc(sizeof(t_color));
+	env->color_scale->red = 200;
+	env->color_scale->green = 150;
+	env->color_scale->blue = 198;
+	env->color_scale->transparency = 255;
 }
 
-void    init_color(t_fractol *env)
+t_fractol	*init_env(int argc, char **argv)
 {
-    env->color_scale = (t_color *)malloc(sizeof(t_color));
-
-    env->color_scale->red = 200;
-    env->color_scale->green = 150;
-    env->color_scale->blue = 255;
-    env->color_scale->transparency = 255;
-}
-
-t_fractol   *init_env(int argc, char **argv)
-{
-    t_fractol	*env;
+	t_fractol	*env;
 	int			i;
 
-    env = (t_fractol *)malloc(sizeof(t_fractol));
+	env = (t_fractol *)malloc(sizeof(t_fractol));
 	set_env_fractol_mode(env, argc, argv);
-    set_env_boundaries(env);
+	set_env_boundaries(env);
 	env->estimator_max = 100;
 	env->width = 1400;
 	env->height = 800;
-    env->radius = 3;
+	env->radius = 3;
 	env->shift_val = 0.04;
-	env->border = (int **)malloc(env->height * sizeof(int*));
+	env->border = (int **)malloc(env->height * sizeof(int *));
 	i = 0;
 	while (i < env->height)
 	{
 		env->border[i] = (int *)malloc(env->width * sizeof(int));
 		i++;
 	}
-    set_zoom(env);
-    env->pixel_size = (double)(env->real_max - env->real_min) / env->width;
-    init_color(env);
+	set_zoom(env);
+	env->pixel_size = (double)(env->real_max - env->real_min) / env->width;
+	init_color(env);
 	env->should_draw = true;
-    return (env);
+	return (env);
 }
