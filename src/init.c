@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ramymoussa <ramymoussa@student.42.fr>      +#+  +:+       +#+        */
+/*   By: ramoussa <ramoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 23:28:58 by ramoussa          #+#    #+#             */
-/*   Updated: 2023/08/08 00:47:14 by ramymoussa       ###   ########.fr       */
+/*   Updated: 2023/08/08 11:13:51 by ramoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,8 @@ void	show_program_options()
 {
 	ft_printf("Please specify a Fractal of the following:\n");
 	ft_printf("1. `mandelbrot`\n");
-	ft_printf("2. `julia`\n");
-	ft_printf("3. `kock` is shortcut for Koch Snowflake\n");
-	ft_printf("4. `multibrot <POWER (default = 3)>` a dynamic fractal of mandelbrot family\n");
+	ft_printf("2. `julia` <REAL C> <IMAGINARY C>  (if left blank, default values is applied.\n");
+	ft_printf("3. `multibrot <POWER (default = 3)>` a dynamic fractal of mandelbrot family.\n");
 }
 
 static void set_env_fractol_mode(t_fractol *env, int argc, char **argv)
@@ -68,21 +67,6 @@ static void set_env_fractol_mode(t_fractol *env, int argc, char **argv)
 				env->julia_c.imag = 0.8;
 				ft_printf("You did not specify C for Julia, setting default values...\n");
 			}
-		}
-		else if (is_equal_str(argv[1], "koch"))
-		{
-			env->f_type = KOCH;
-			env->name = "KOCH SNOWFLAKE Fractol";
-		}
-		else if (is_equal_str(argv[1], "newton"))
-		{
-			env->f_type = NEWTON;
-			env->name = "NEWTON Fractal";
-		}
-		else if (is_equal_str(argv[1], "ship"))
-		{
-			env->f_type = BURNINGSHIP;
-			env->name = "BURNING SHIP Fractal";
 		}
 		else if (is_equal_str(argv[1], "multibrot"))
 		{

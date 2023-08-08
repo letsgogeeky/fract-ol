@@ -6,13 +6,11 @@
 /*   By: ramoussa <ramoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 23:30:07 by ramoussa          #+#    #+#             */
-/*   Updated: 2023/08/05 23:30:15 by ramoussa         ###   ########.fr       */
+/*   Updated: 2023/08/08 11:11:33 by ramoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "frontend.h"
-#include "fractol.h"
-
 
 void ft_window_resize_hook(int32_t width, int32_t height, void * param)
 {
