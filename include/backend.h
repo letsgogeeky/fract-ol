@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   backend.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ramymoussa <ramymoussa@student.42.fr>      +#+  +:+       +#+        */
+/*   By: ramoussa <ramoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 05:55:45 by ramoussa          #+#    #+#             */
-/*   Updated: 2023/08/08 00:17:18 by ramymoussa       ###   ########.fr       */
+/*   Updated: 2023/08/08 11:22:39 by ramoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,14 +82,8 @@ void        complex_add(t_complex *original, const t_complex *c);
  * @return A new complex number representing the sum of `original` and `c`.
  */
 t_complex	complex_add_immutable(t_complex original, t_complex c);
-void		complex_pow_3(t_complex *complex);
-void		complex_subtract(t_complex *c1, t_complex *c2);
-t_complex	*complex_subtract_immutable(t_complex *c1, t_complex c2);
 void        set_complex(t_complex *point, double real, double imaginary);
-t_complex	*complex_divide(t_complex *numerator, t_complex	*denominator);
-void		complex_multiply_scalar(t_complex *complex, int scalar);
 t_complex   *complex_copy(t_complex *original);
-void        print_complex(t_complex *complex);
 void        update_pixel_size(t_fractol *env);
 
 /**

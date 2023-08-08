@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fractol.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ramymoussa <ramymoussa@student.42.fr>      +#+  +:+       +#+        */
+/*   By: ramoussa <ramoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 05:58:40 by ramoussa          #+#    #+#             */
-/*   Updated: 2023/08/08 00:17:15 by ramymoussa       ###   ########.fr       */
+/*   Updated: 2023/08/08 11:07:57 by ramoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,6 @@ enum FractolTypeEnum
 {
     MANDELBROT,
     JULIA,
-	KOCH,
-	NEWTON,
-	BURNINGSHIP,
     MULTIBROT
 };
 
