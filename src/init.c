@@ -6,7 +6,7 @@
 /*   By: ramoussa <ramoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 23:28:58 by ramoussa          #+#    #+#             */
-/*   Updated: 2023/08/08 13:07:12 by ramoussa         ###   ########.fr       */
+/*   Updated: 2023/08/08 13:15:16 by ramoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	show_program_options()
 
 static void set_env_fractol_mode(t_fractol *env, int argc, char **argv)
 {
-    if (argc < 2)
+    if (argc < 2 || ft_strlen(argv[1]) != 1)
 	{
 		ft_printf("UNKNOWN FRACTAL PASSED AS PARAM...!\n");
 		show_program_options();
