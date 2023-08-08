@@ -6,7 +6,7 @@
 /*   By: ramoussa <ramoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 23:29:04 by ramoussa          #+#    #+#             */
-/*   Updated: 2023/08/05 23:29:05 by ramoussa         ###   ########.fr       */
+/*   Updated: 2023/08/08 12:09:48 by ramoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,9 @@ int32_t	main(int argc, char **argv)
 	t_fractol *env;
 	
 	env = init_env(argc, argv);
-	mlx_t* mlx = mlx_init(env->width, env->height, env->name, false);
+	mlx_t* mlx = mlx_init(env->width, env->height, \
+						  "Fractals (Mandelbrot, Julia, & Multibrot)",\
+						  false);
 	if (!mlx)
 		ft_error();
 	env->mlx = mlx;

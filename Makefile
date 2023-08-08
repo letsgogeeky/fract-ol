@@ -6,13 +6,13 @@
 #    By: ramoussa <ramoussa@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/05 22:29:23 by ramoussa          #+#    #+#              #
-#    Updated: 2023/08/08 11:19:28 by ramoussa         ###   ########.fr        #
+#    Updated: 2023/08/08 12:35:00 by ramoussa         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME:= fractol
 
-CFLAGS	:= -Wextra -Wall -Werror -g -O3 -funroll-loops
+CFLAGS	:= -Wextra -Wall -Werror -g -O3 -funroll-loops -fsanitize=address
 LIBMLX := ./lib/MLX42
 BASELIB := ./lib/ft-baselib
 

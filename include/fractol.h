@@ -6,7 +6,7 @@
 /*   By: ramoussa <ramoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/04 05:58:40 by ramoussa          #+#    #+#             */
-/*   Updated: 2023/08/08 11:07:57 by ramoussa         ###   ########.fr       */
+/*   Updated: 2023/08/08 13:03:32 by ramoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ typedef struct s_color
 typedef struct s_fractol
 {
     enum FractolTypeEnum    f_type;
-    char                    *name;
     t_complex               min;
     t_complex               max;
     double                  real_min;

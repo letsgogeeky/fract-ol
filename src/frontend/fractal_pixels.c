@@ -6,7 +6,7 @@
 /*   By: ramoussa <ramoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 11:10:37 by ramoussa          #+#    #+#             */
-/*   Updated: 2023/08/08 11:10:38 by ramoussa         ###   ########.fr       */
+/*   Updated: 2023/08/08 12:50:47 by ramoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ void draw_multibrot(t_fractol *env)
 	int x;
 	int y;
 	int n;
-	t_complex *z;
-	t_complex *c;
+	t_complex z;
+	t_complex c;
 
-	z = (t_complex *)malloc(sizeof(t_complex*));
-	c = (t_complex *)malloc(sizeof(t_complex*));
+	set_complex(&c, 0, 0);
+	set_complex(&z, 0, 0);
 	x = 0;
 	y = 0;
 	while (y < env->height)
@@ -35,18 +35,16 @@ void draw_multibrot(t_fractol *env)
 		x = 0;
 		y++;
 	}
-	free(z);
-	free(c);
 }
 
 void draw_julia(t_fractol *env)
 {
 	int x;
 	int y;
-	t_complex *z;
+	t_complex z;
 	int n;
-
-	z = (t_complex *)malloc(sizeof(t_complex*));
+	z.real = 0;
+	z.imag = 0;
 	x = 0;
 	y = 0;
 	// set_complex(c, -0.5251993, -0.5251993);
@@ -61,19 +59,18 @@ void draw_julia(t_fractol *env)
 		x = 0;
 		y++;
 	}
-	free(z);
 }
 
 void draw_mandelbrot(t_fractol *env)
 {
 	int x;
 	int y;
-	t_complex *z;
+	t_complex z;
 	int n;
-	t_complex *c;
+	t_complex c;
 
-	z = (t_complex *)malloc(sizeof(t_complex*));
-	c = (t_complex *)malloc(sizeof(t_complex*));
+	set_complex(&c, 0, 0);
+	set_complex(&z, 0, 0);
 	x = 0;
 	y = 0;
 	while (y < env->height)
@@ -87,6 +84,4 @@ void draw_mandelbrot(t_fractol *env)
 		x = 0;
 		y++;
 	}
-	free(z);
-	free(c);
 }

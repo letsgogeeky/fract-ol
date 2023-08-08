@@ -6,7 +6,7 @@
 /*   By: ramoussa <ramoussa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/05 23:28:58 by ramoussa          #+#    #+#             */
-/*   Updated: 2023/08/08 11:13:51 by ramoussa         ###   ########.fr       */
+/*   Updated: 2023/08/08 13:07:12 by ramoussa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,30 +32,27 @@ int is_equal_str(char *s1, char *s2)
 void	show_program_options()
 {
 	ft_printf("Please specify a Fractal of the following:\n");
-	ft_printf("1. `mandelbrot`\n");
-	ft_printf("2. `julia` <REAL C> <IMAGINARY C>  (if left blank, default values is applied.\n");
-	ft_printf("3. `multibrot <POWER (default = 3)>` a dynamic fractal of mandelbrot family.\n");
+	ft_printf("1. `m` to render Mandelbrot.\n");
+	ft_printf("2. `j <REAL C> <IMAGINARY C>` to render Julia (if left blank, default values is applied.\n");
+	ft_printf("3. `t <POWER (default = 3)>` to render Multibrot: a dynamic fractal of mandelbrot family.\n");
 }
 
 static void set_env_fractol_mode(t_fractol *env, int argc, char **argv)
 {
     if (argc < 2)
 	{
-		
+		ft_printf("UNKNOWN FRACTAL PASSED AS PARAM...!\n");
+		show_program_options();
 		free(env);
 		exit(0);
 	}
 	else
 	{
-		if (is_equal_str(argv[1], "mandelbrot"))
-		{
+		if (argv[1][0] == 'm')
 			env->f_type = MANDELBROT;
-			env->name = "Mandelbrot Fractol";
-		}
-		else if (is_equal_str(argv[1], "julia"))
+		else if (argv[1][0] == 'j')
 		{
 			env->f_type = JULIA;
-			env->name = "Julia Fractol";
 			if (argc >= 4)
 			{
 				env->julia_c.real = get_double(argv[2]);
@@ -68,10 +65,9 @@ static void set_env_fractol_mode(t_fractol *env, int argc, char **argv)
 				ft_printf("You did not specify C for Julia, setting default values...\n");
 			}
 		}
-		else if (is_equal_str(argv[1], "multibrot"))
+		else if (argv[1][0] == 't')
 		{
 			env->f_type = MULTIBROT;
-			env->name = "MULTIBROT Fractal";
 			if (argc > 2)
 				env->multibrot_n = ft_atoi(argv[2]);
 			else
